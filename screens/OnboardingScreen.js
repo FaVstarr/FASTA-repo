@@ -4,12 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 
 import Onboarding from 'react-native-onboarding-swiper';
 
-const Done =({...props}) => (
-  <Button className="bg-blue-500"
-  title='Sign in'
-  {...props}
-  />
-)
+
 
 
 
@@ -25,7 +20,7 @@ export default function OnboardingScreen({navigation}) {
     <Onboarding className="flex-1 items-center justify-center my-[30px]" 
     onSkip={()=> navigation.navigate("Signin")}
     onDone={()=> navigation.navigate("Signin")}
-    DoneButtonComponent={Done}
+    
     
 
     pages={[
@@ -48,7 +43,13 @@ export default function OnboardingScreen({navigation}) {
         subtitle: 'Track your packages/items from the comfort of your home till final destination',
       },
     ]}
+
+    
   />
+
+  
+
+  
       
     
   )
