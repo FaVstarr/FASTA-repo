@@ -1,8 +1,12 @@
-import React from "react";
+import React , {useState} from "react";
 import { Button, Text, TextInput, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+
+
 export default function Signin({ navigation }) {
+    const [toggleCheckBox, setToggleCheckBox] = useState(false);
+
   return (
     <SafeAreaView className="px-6">
       <Text className="text-[24px] mt-[30px] text-[#3A3A3A] ">
@@ -42,10 +46,8 @@ export default function Signin({ navigation }) {
           secureTextEntry={true}
         />
       </View>
-
-      <View>
-       
-      </View>
+      
+      <View></View>
     </SafeAreaView>
   );
 }
