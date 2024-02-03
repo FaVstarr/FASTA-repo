@@ -44,7 +44,7 @@ export default function Signin({ navigation }) {
       </View>
 
       <View>
-        
+       
       </View>
     </SafeAreaView>
   );
