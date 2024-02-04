@@ -31,7 +31,7 @@ export default function NewPassword() {
       <View className="mt-[64px] ">
         <Button title={'Set New Password'} 
         buttonStyle={{ backgroundColor: "rgba(5, 96, 250, 1)" }}
-        onPress={() => navigation.navigate('NewPassword')}/>
+        />
     </View>
 
       

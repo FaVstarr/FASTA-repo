@@ -58,7 +58,8 @@ export default function Signup({ navigation }) {
            
            
          />
-        <Text className="mr-6 text-[12px] block pr-8 pt-3 text-[#A7A7A7]">By ticking this box, you agree to our <Text className="text-[#EBBC2E]"> Terms and conditions and private policy</Text></Text>
+        <Text className="mr-6 text-[12px] block pr-8 pt-3 text-[#A7A7A7]">By ticking this box, you agree to our
+        <TouchableOpacity className=""><Text className="text-[#EBBC2E] block text-[12px]"> Terms and conditions and private policy</Text></TouchableOpacity> </Text>
 
         
       </View>
