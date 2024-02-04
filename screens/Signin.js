@@ -46,7 +46,7 @@ export default function Signin({ navigation }) {
             Remember password
           </Text>
         </View>
-      <TouchableOpacity className="pt-3 " onPress={navigation.navigate('ForgotPassword')}>
+      <TouchableOpacity className="pt-3 " onPress={()=>navigation.navigate('ForgotPassword')}>
         <Text className="text-[#0560FA] text-[12px]">Forgot Password</Text>
       </TouchableOpacity>
       </View>
