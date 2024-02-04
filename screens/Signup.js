@@ -1,5 +1,5 @@
 import React , {useState} from "react";
-import {  Text, TextInput, View , FlatList} from "react-native";
+import {  Text, TextInput, View , FlatList, TouchableOpacity} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { CheckBox, Button } from '@rneui/themed';
 
@@ -71,7 +71,9 @@ export default function Signup({ navigation }) {
 
       <View className="flex flex-row">
         <Text className="mt-3">Already have an account?</Text>
-        <Button title="Sign in" type="clear" className=" " onPress={() => navigation.navigate('Signin')}  />
+        <TouchableOpacity onPress={() => navigation.navigate('Signin')}>
+            <Text className="pt-3 text-[#0560FA]">Sign in</Text>
+        </TouchableOpacity>
       </View>
       
       

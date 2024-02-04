@@ -46,7 +46,7 @@ export default function Signin({ navigation }) {
             Remember password
           </Text>
         </View>
-      <TouchableOpacity className="pt-3 " onPress={navigation.navigate('')}>
+      <TouchableOpacity className="pt-3 " onPress={navigation.navigate('ForgotPassword')}>
         <Text className="text-[#0560FA] text-[12px]">Forgot Password</Text>
       </TouchableOpacity>
       </View>
@@ -60,13 +60,12 @@ export default function Signin({ navigation }) {
       </View>
 
       <View className="flex flex-row">
-        <Text className="mt-3">Already have an account?</Text>
-        <Button
-          title="Sign in"
-          type="clear"
-          className=" "
-          onPress={() => navigation.navigate("")}
-        />
+        <Text className="mt-3">Don't have an account?</Text>
+        <TouchableOpacity onPress={()=> navigation.push('Signup')}>
+            <Text className="pt-3 text-[#0560FA]">
+                Sign up
+            </Text>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
