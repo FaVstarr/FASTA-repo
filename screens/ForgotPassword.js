@@ -2,7 +2,7 @@ import { View, Text, SafeAreaView, TextInput } from 'react-native'
 import React from 'react'
 import { CheckBox, Button } from "@rneui/themed";
 
-export default function ForgotPassword() {
+export default function ForgotPassword({navigation}) {
   return (
     <SafeAreaView className="px-6">
        <Text className="text-[24px] mt-[30px] text-[#3A3A3A] ">
@@ -23,7 +23,8 @@ export default function ForgotPassword() {
 
     <View className="mt-[64px]">
         <Button title={'Send OTP'} 
-        buttonStyle={{ backgroundColor: "rgba(5, 96, 250, 1)" }}/>
+        buttonStyle={{ backgroundColor: "rgba(5, 96, 250, 1)" }}
+        onPress={() => navigation.navigate('OtpVerification')}/>
     </View>
     </SafeAreaView>
   )
