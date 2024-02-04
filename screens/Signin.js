@@ -54,8 +54,9 @@ export default function Signin({ navigation }) {
       <View className="mt-[30px]">
         <Button
           className=""
-          title="Sign up"
+          title="Sign in"
           buttonStyle={{ backgroundColor: "rgba(5, 96, 250, 1)" }}
+          onPress={()=>navigation.navigate('HomeScreen')}
         />
       </View>
 

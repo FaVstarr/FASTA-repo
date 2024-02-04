@@ -33,6 +33,7 @@ export default function App() {
           <Stack.Screen name="OnboardingScreen" component={OnboardingScreen} />
           <Stack.Screen name="OtpVerification" component={OtpVerification} />
           <Stack.Screen name="NewPassword" component={NewPassword} />
+          <Stack.Screen name="HomeScreen" component={HomeScreen} />
         </Stack.Navigator>
     
     </NavigationContainer>
