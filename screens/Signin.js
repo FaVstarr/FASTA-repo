@@ -1,12 +1,13 @@
 import React , {useState} from "react";
-import { Button, Text, TextInput, View , FlatList} from "react-native";
+import {  Text, TextInput, View , FlatList} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { CheckBox } from '@rneui/themed';
+import { CheckBox, Button } from '@rneui/themed';
+import Signup from "./Signup";
 
 
 export default function Signin({ navigation }) {
-    const [checked, setChecked] = useState()
-
+    const [checked, setChecked] = useState(true)
+    const toggleCheckbox = () => setChecked(!checked);
   return (
     <SafeAreaView className="px-6">
       <Text className="text-[24px] mt-[30px] text-[#3A3A3A] ">
@@ -47,9 +48,36 @@ export default function Signin({ navigation }) {
         />
       </View>
       
-      <View>
-      
+      <View className="flex flex-row mt-4">
+      <CheckBox className=""
+           checked={checked}
+           onPress={toggleCheckbox}
+           iconType="material-community"
+           checkedIcon="checkbox-outline"
+           uncheckedIcon={'checkbox-blank-outline'}
+           
+           
+         />
+        <Text className="mr-6 text-[12px] block pr-8 pt-3 text-[#A7A7A7]">By ticking this box, you agree to our <Text className="text-[#EBBC2E]"> Terms and conditions and private policy</Text></Text>
+
+        
       </View>
+
+      <View className="mt-[30px]">
+        <Button className=""
+        title="Sign up" 
+        buttonStyle={{backgroundColor: 'rgba(5, 96, 250, 1)'}}/>
+      </View>
+
+      <View>
+        <Text>Already have an account? </Text>
+      </View>
+      
+      
+
+        
+      
+      
     </SafeAreaView>
   );
 }
