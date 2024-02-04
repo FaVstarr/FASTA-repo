@@ -20,28 +20,28 @@ export default function Signup({ navigation }) {
       <View className="mt-[30px]">
         <Text className="text-[#A7A7A7]">Full Name</Text>
         <TextInput
-          className="border border-[#A7A7A7] rounded placeholder-slate-400 text-[#3A3A3A] pl-4"
+          className="border border-[#A7A7A7] rounded placeholder-slate-400 text-[#3A3A3A] pl-2"
           maxLength={40}
           placeholder="Favour Chamberlain"
         />
 
         <Text className="pt-[20px] text-[#A7A7A7]">Phone Number</Text>
         <TextInput
-          className="border border-[#A7A7A7] rounded placeholder-slate-400 text-[#3A3A3A] pl-4"
+          className="border border-[#A7A7A7] rounded placeholder-slate-400 text-[#3A3A3A] pl-2"
           maxLength={40}
           placeholder="07080136822"
         />
 
         <Text className="pt-[20px] text-[#A7A7A7]">Email</Text>
         <TextInput
-          className="border border-[#A7A7A7] rounded placeholder-slate-400 text-[#3A3A3A] pl-4"
+          className="border border-[#A7A7A7] rounded placeholder-slate-400 text-[#3A3A3A] pl-2"
           maxLength={40}
           placeholder="favourchamberlain32@gmail.com"
         />
 
         <Text className="pt-[20px] text-[#A7A7A7]">Password</Text>
         <TextInput
-          className="border border-[#A7A7A7] rounded placeholder-slate-400 text-[#3A3A3A] pl-4"
+          className="border border-[#A7A7A7] rounded placeholder-slate-400 text-[#3A3A3A] pl-2"
           maxLength={16}
           placeholder="********"
           secureTextEntry={true}

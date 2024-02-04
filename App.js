@@ -10,6 +10,7 @@ import HomeScreen from './screens/HomeScreen';
 import DeliveriesScreen from './screens/DeliveriesScreen';
 import ForgotPassword from './screens/ForgotPassword';
 import OtpVerification from './screens/OtpVerification';
+import NewPassword from './screens/NewPassword';
 
 
 
@@ -31,6 +32,7 @@ export default function App() {
           <Stack.Screen name='ForgotPassword' component={ForgotPassword} />
           <Stack.Screen name="OnboardingScreen" component={OnboardingScreen} />
           <Stack.Screen name="OtpVerification" component={OtpVerification} />
+          <Stack.Screen name="NewPassword" component={NewPassword} />
         </Stack.Navigator>
     
     </NavigationContainer>

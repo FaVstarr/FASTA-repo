@@ -15,7 +15,7 @@ export default function ForgotPassword({navigation}) {
       <View className="mt-[30px]">
         <Text className="pt-[20px] text-[#A7A7A7]">Email</Text>
         <TextInput
-          className="border border-[#A7A7A7] rounded placeholder-slate-400 text-[#3A3A3A] pl-4"
+          className="border border-[#A7A7A7] rounded placeholder-slate-400 text-[#3A3A3A] pl-2"
           maxLength={40}
           placeholder="favourchamberlain32@gmail.com"
         />

@@ -1,10 +1,11 @@
-import { View, Text, SafeAreaView, StyleSheet } from 'react-native'
+import { View, Text, SafeAreaView, StyleSheet, TouchableOpacity } from 'react-native'
 import React, {useState } from 'react'
 import OTPTextView from 'react-native-otp-textinput';
 import { useRef } from 'react';
+import { Button } from "@rneui/themed"
 
 
-export default function OtpVerification() {
+export default function OtpVerification({navigation}) {
   const [otpInput, setOtpInput] = useState('');
 
   const input = useRef<OTPTextView>(null);
@@ -52,14 +53,14 @@ export default function OtpVerification() {
     },
     roundedTextInput: {
       borderRadius: 10,
-      borderWidth: 4,
+      borderWidth: 1,
     },
     buttonWrapper: {
       flexDirection: 'row',
       justifyContent: 'space-around',
       marginBottom: 20,
       width: '60%',
-      gap: 20,
+      gap: 10,
     },
     textInput: {
       height: 40,
@@ -74,7 +75,7 @@ export default function OtpVerification() {
     },
   });
   return (
-    <SafeAreaView className="pl-2">
+    <SafeAreaView className="px-3">
         <Text className="text-[24px] mt-[30px] text-[#3A3A3A] ">
         Otp Verification
       </Text>
@@ -82,6 +83,8 @@ export default function OtpVerification() {
       Enter the 6 digit numbers sent to your email
       </Text>
 
+
+      <View className="mt-[70px]">
       <OTPTextView
            containerStyle={styles.textInputContainer}
            textInputStyle={styles.roundedTextInput}
@@ -89,6 +92,21 @@ export default function OtpVerification() {
           inputCellLength={1}
           tintColor="#EC8000"
         />
+      </View>
+      <View className="flex flex-row items-center justify-center">
+        <Text>If you didn’t receive code, </Text>
+      <TouchableOpacity>
+        <Text className="text-[#0560FA]">Resend</Text>
+      </TouchableOpacity>
+      </View>
+
+      <View className="mt-[64px] ">
+        <Button title={'Set New Password'} 
+        buttonStyle={{ backgroundColor: "rgba(5, 96, 250, 1)" }}
+        onPress={() => navigation.navigate('NewPassword')}/>
+    </View>
+      
+      
     </SafeAreaView>
   )
 }
