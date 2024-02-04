@@ -18,8 +18,8 @@ export default function OnboardingScreen({navigation}) {
   return (
     
     <Onboarding className="flex-1 items-center justify-center my-[30px]" 
-    onSkip={()=> navigation.navigate("Signin")}
-    onDone={()=> navigation.navigate("Signin")}
+    onSkip={()=> navigation.navigate("Signup")}
+    onDone={()=> navigation.navigate("Signup")}
     
     
 

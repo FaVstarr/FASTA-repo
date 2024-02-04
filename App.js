@@ -8,6 +8,7 @@ import Signin from './screens/Signin';
 import OnboardingScreen from './screens/OnboardingScreen';
 import HomeScreen from './screens/HomeScreen';
 import DeliveriesScreen from './screens/DeliveriesScreen';
+import ForgotPassword from './screens/ForgotPassword';
 
 
 
@@ -26,6 +27,7 @@ export default function App() {
           <Stack.Screen name="Deliveries" component={DeliveriesScreen} />
           <Stack.Screen name="Signup" component={Signup}/>
           <Stack.Screen name="Signin" component={Signin}/>
+          <Stack.Screen name='ForgotPassword' component={ForgotPassword} />
           <Stack.Screen name="OnboardingScreen" component={OnboardingScreen} />
         </Stack.Navigator>
     
