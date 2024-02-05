@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import {  Text, View } from 'react-native';
 import React, { useLayoutEffect } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Signup from './screens/Signup';
 import Signin from './screens/Signin';
@@ -17,13 +17,23 @@ import NewPassword from './screens/NewPassword';
 
 const Stack = createNativeStackNavigator()
 
+const navTheme = {
+  ...DefaultTheme,
+  colors:{
+    ...DefaultTheme.colors,
+    background: 'white'
+  }
+}
+
 
 export default function App() {
   
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={navTheme} >
         <Stack.Navigator initialRouteName='OnboardingScreen' 
         screenOptions={{headerShown: false}}
+        
+        
         >
           <Stack.Screen name="Home" component={HomeScreen} />
           <Stack.Screen name="Deliveries" component={DeliveriesScreen} />
