@@ -1,17 +1,39 @@
-import { View, Text, SafeAreaView, TouchableOpacity, Image } from "react-native";
+import { View, Text, SafeAreaView, TouchableOpacity, Image, TouchableHighlight } from "react-native";
 import React, { useState } from "react";
 import { SearchBar } from "@rneui/themed";
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 export default function HomeScreen() {
+
+  
   const [search, setSearch] = useState("");
 
   const updateSearch = (search) => {
     setSearch(search);
   };
 
+  const onPress = () =>{
+    console.log('was pressed')
+  }
 
   return (
+
+    
     <SafeAreaView className="px-3">
+      
+      
       <View className="mt-9 rounded">
       <SearchBar
       placeholder="Search Services"
@@ -35,19 +57,49 @@ export default function HomeScreen() {
           <Text className="text-[#0560FA]">Special for you</Text>
         </View>
 
+        {/* Cards */}
         <View className="mt-[90px]">  
         <Text className="text-[#0560FA]">What will you like to do</Text>
 
-        <TouchableOpacity>
-          <View className="">
+        {/* 1st 2 cards */}
+        <View className="flex flex-row gap-[23px]">
+        <TouchableOpacity onPress={onPress}>
+          <View className="bg-[#F2F2F2] w-[159px] h-[159px] pt-[20px] pl-2 rounded-[8px] ">
             <Image source={require('../assets/images/healthicons_call-centre.png')} />
             <Text className="text-[16px] text-[#0560FA]">Customer care</Text>
             <Text className="text-[7.45px] block">Our customer care service line is available from 8 -9pm week days and 9 - 5 weekends - tap to call us today</Text>
           </View>
         </TouchableOpacity>
+        <TouchableOpacity>
+          <View className="bg-[#F2F2F2] w-[159px] h-[159px] pt-[35px] pl-2 rounded-[8px]">
+            <Image source={require('../assets/images/codicon_package.png')} />
+            <Text className="text-[16px] text-[#0560FA]">Send a package</Text>
+            <Text className="text-[7.45px] block">Request for a driver to pick up or deliver your package for you</Text>
+          </View>
+        </TouchableOpacity>
+        </View>
+
+        {/* 2nd 2 cards */}
+        <View className="flex flex-row gap-[23px] mt-[24px]">
+        <TouchableOpacity>
+          <View className="bg-[#F2F2F2] w-[159px] h-[159px] pt-[20px] pl-2 rounded-[8px]">
+            <Image source={require('../assets/images/wallet.png')} />
+            <Text className="text-[16px] text-[#0560FA]">Fund your wallet</Text>
+            <Text className="text-[7.45px] block">To fund your wallet is as easy as ABC, make use of our fast technology and top-up your wallet today</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity className="">
+          <View className="bg-[#F2F2F2] w-[159px] h-[159px] pt-[35px] pl-2 rounded-[8px] ">
+            <Image source={require('../assets/images/Vector.png')} className="" />
+            <Text className="text-[16px] text-[#0560FA]">Book a Rider</Text>
+            <Text className="text-[7.45px] block">Search for available driver within your area</Text>
+          </View>
+        </TouchableOpacity>
         </View>
         
-       
+        </View>
+        
+        
     </SafeAreaView>
   );
 }
