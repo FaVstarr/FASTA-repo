@@ -14,7 +14,10 @@ import NewPassword from './screens/NewPassword';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { Entypo } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
+import { FontAwesome5 } from '@expo/vector-icons';
 import Wallet from './screens/Wallet';
+import Profile from './screens/Profile';
+import Notification from './screens/Notification';
 
 
 
@@ -38,7 +41,8 @@ export default function App() {
       <Tab.Navigator initialRouteName='Home' screenOptions={{headerShown: false}}>
         <Tab.Screen name='Home' component={HomeScreen} options={{ tabBarIcon:({}) =>(<Entypo name="home" size={24} color="#0560FA" />) }} />
         <Tab.Screen name='Wallet' component={Wallet} options={{ tabBarIcon:({}) =>(<Entypo name="wallet" size={24} color="#0560FA" />) }} />
-        <Tab.Screen name="Deliveries" component={DeliveriesScreen} options={{ tabBarIcon:({}) =>(<MaterialIcons name="delivery-dining" size={24} color="#0560FA" />) }}  />
+        <Tab.Screen name="Track" component={DeliveriesScreen} options={{ tabBarIcon:({}) =>(<MaterialIcons name="delivery-dining" size={24} color="#0560FA" />) }}  />
+        <Tab.Screen name='Profile' component={Profile} options={{ tabBarIcon:({}) =>(<FontAwesome5 name="user-circle" size={24} color="#0560FA" />) }} />
       </Tab.Navigator>
     )
   }
@@ -47,20 +51,21 @@ export default function App() {
   return (
     <NavigationContainer theme={navTheme} >
         <Stack.Navigator initialRouteName='OnboardingScreen' 
-        screenOptions={{headerShown: false}}
+        
         
         
         >
           
           
-          <Stack.Screen name="Signup" component={Signup}/>
-          <Stack.Screen name="Signin" component={Signin}/>
-          <Stack.Screen name='ForgotPassword' component={ForgotPassword} />
-          <Stack.Screen name="OnboardingScreen" component={OnboardingScreen} />
-          <Stack.Screen name="OtpVerification" component={OtpVerification} />
-          <Stack.Screen name="NewPassword" component={NewPassword} />
+          <Stack.Screen name="Signup" component={Signup} options={{headerShown: false}}/>
+          <Stack.Screen name="Signin" component={Signin} options={{headerShown: false}}/>
+          <Stack.Screen name='ForgotPassword' component={ForgotPassword} options={{headerShown: false}} />
+          <Stack.Screen name="OnboardingScreen" component={OnboardingScreen} options={{headerShown: false}} />
+          <Stack.Screen name="OtpVerification" component={OtpVerification} options={{headerShown: false}} />
+          <Stack.Screen name="NewPassword" component={NewPassword} options={{headerShown: false}} />
           
-          <Stack.Screen name="HomeScreen" component={TabNavigation} />
+          <Stack.Screen name="HomeScreen" component={TabNavigation} options={{headerShown: false}} />
+          <Stack.Screen name='Notification' component={Notification}  />
           
           
         </Stack.Navigator>

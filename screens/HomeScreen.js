@@ -15,7 +15,7 @@ import { SearchBar } from "@rneui/themed";
 
 
 
-export default function HomeScreen() {
+export default function HomeScreen({navigation}) {
 
   
   const [search, setSearch] = useState("");
@@ -48,7 +48,7 @@ export default function HomeScreen() {
         <Text className="text-[24px] text-white">Hello Favour</Text>
         <Text className="text-[12px] text-white">We trust you're having a great time</Text>
       </View>
-      <TouchableOpacity className="pl-[74px] pt-3">
+      <TouchableOpacity className="pl-[74px] pt-3" onPress={() => navigation.navigate('Notification')}>
         <Image source={require('../assets/images/notification.png')}/>
       </TouchableOpacity>
         </View>
