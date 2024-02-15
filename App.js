@@ -18,6 +18,7 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import Wallet from './screens/Wallet';
 import Profile from './screens/Profile';
 import Notification from './screens/Notification';
+import SendPackage from './screens/SendPackage';
 
 
 
@@ -38,7 +39,7 @@ export default function App() {
   
   const TabNavigation = () =>{
     return (
-      <Tab.Navigator initialRouteName='Home' screenOptions={{headerShown: false}}>
+      <Tab.Navigator initialRouteName='Home' screenOptions={{headerShown: false}} labeled>
         <Tab.Screen name='Home' component={HomeScreen} options={{ tabBarIcon:({}) =>(<Entypo name="home" size={24} color="#0560FA" />) }} />
         <Tab.Screen name='Wallet' component={Wallet} options={{ tabBarIcon:({}) =>(<Entypo name="wallet" size={24} color="#0560FA" />) }} />
         <Tab.Screen name="Track" component={DeliveriesScreen} options={{ tabBarIcon:({}) =>(<MaterialIcons name="delivery-dining" size={24} color="#0560FA" />) }}  />
@@ -66,6 +67,15 @@ export default function App() {
           
           <Stack.Screen name="HomeScreen" component={TabNavigation} options={{headerShown: false}} />
           <Stack.Screen name='Notification' component={Notification}  />
+          <Stack.Screen name='SendPackage' component={SendPackage} options={{
+            title: 'Send A Package',
+            headerTitleAlign: 'center',
+            headerTitleStyle: {
+              color: '#A7A7A7'
+            },
+            
+          }} />
+          <Stack.Screen name='Wallet' component={Wallet} />
           
           
         </Stack.Navigator>

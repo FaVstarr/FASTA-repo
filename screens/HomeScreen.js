@@ -70,7 +70,7 @@ export default function HomeScreen({navigation}) {
             <Text className="text-[7.45px] block">Our customer care service line is available from 8 -9pm week days and 9 - 5 weekends - tap to call us today</Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={()=> navigation.navigate('SendPackage')}>
           <View className="bg-[#F2F2F2] w-[159px] h-[159px] pt-[35px] pl-2 rounded-[8px]">
             <Image source={require('../assets/images/codicon_package.png')} />
             <Text className="text-[16px] text-[#0560FA]">Send a package</Text>
@@ -81,7 +81,7 @@ export default function HomeScreen({navigation}) {
 
         {/* 2nd 2 cards */}
         <View className="flex flex-row gap-[23px] mt-[24px]">
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Wallet')}>
           <View className="bg-[#F2F2F2] w-[159px] h-[159px] pt-[20px] pl-2 rounded-[8px]">
             <Image source={require('../assets/images/wallet.png')} />
             <Text className="text-[16px] text-[#0560FA]">Fund your wallet</Text>

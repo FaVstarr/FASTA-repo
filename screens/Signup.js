@@ -28,8 +28,10 @@ export default function Signup({ navigation }) {
         <Text className="pt-[20px] text-[#A7A7A7]">Phone Number</Text>
         <TextInput
           className="border border-[#A7A7A7] rounded placeholder-slate-400 text-[#3A3A3A] pl-2"
-          maxLength={40}
+          maxLength={11}
           placeholder="07080136822"
+          keyboardType="numeric"
+
         />
 
         <Text className="pt-[20px] text-[#A7A7A7]">Email</Text>
