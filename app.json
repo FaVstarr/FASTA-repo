@@ -18,11 +18,12 @@
       "supportsTablet": true
     },
     "android": {
+      "googleServicesFile": "google-service.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      },
-      "package": "com.favstar.fasta"
+      }
+      
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -32,5 +33,7 @@
         "projectId": "90ee48b1-e36e-4bd3-9595-7c6b79f9370f"
       }
     }
+    
+
   }
 }
