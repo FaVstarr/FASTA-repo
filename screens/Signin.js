@@ -1,11 +1,36 @@
 import React, { useState } from "react";
-import { Text, TextInput, View, FlatList, TouchableOpacity } from "react-native";
+import { Text, TextInput, View, FlatList, TouchableOpacity, Alert } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { CheckBox, Button } from "@rneui/themed";
+
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
+
+
+  
 
 export default function Signin({ navigation }) {
   const [checked, setChecked] = useState(true);
   const toggleCheckbox = () => setChecked(!checked);
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = async () => {
+    try {
+      const userCredential = await firebase
+        .auth()
+        .signInWithEmailAndPassword(email, password);
+      // Redirect or perform actions after successful login
+      console.log("User logged in successfully:", userCredential.user);
+      // Navigate to dashboard or home screen
+      Alert.alert("Login successful")
+      navigation.navigate('HomeScreen' , {fullName: userCredential.user.displayName || userCredential.user.email});
+    } catch (error) {
+      console.error("Error logging in:", error);
+      Alert.alert("Error", error.message);
+    }
+  };
   return (
     <SafeAreaView className="px-6">
       <Text className="text-[24px] mt-[30px] text-[#3A3A3A] ">
@@ -21,6 +46,7 @@ export default function Signin({ navigation }) {
           className="border border-[#A7A7A7] rounded placeholder-slate-400 text-[#3A3A3A] pl-2"
           maxLength={40}
           placeholder="favourchamberlain32@gmail.com"
+          onChangeText={(text)=> setEmail(text)}
         />
 
         <Text className="pt-[20px] text-[#A7A7A7]">Password</Text>
@@ -29,6 +55,7 @@ export default function Signin({ navigation }) {
           maxLength={16}
           placeholder="********"
           secureTextEntry={true}
+          onChangeText={(text) => setPassword(text)}
         />
       </View>
 
@@ -56,7 +83,7 @@ export default function Signin({ navigation }) {
           className=""
           title="Sign in"
           buttonStyle={{ backgroundColor: "rgba(5, 96, 250, 1)" }}
-          onPress={()=>navigation.navigate('HomeScreen')}
+          onPress={handleLogin}
         />
       </View>
 

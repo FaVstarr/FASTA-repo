@@ -1,13 +1,70 @@
 import React , {useState} from "react";
-import {  Text, TextInput, View , FlatList, TouchableOpacity} from "react-native";
+import {  Text, TextInput, View , FlatList, TouchableOpacity, Alert} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { CheckBox, Button } from '@rneui/themed';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/firestore';
+import 'firebase/compat/auth'
+
+
+
+
+
+
+
 
 
 
 export default function Signup({ navigation }) {
     const [checked, setChecked] = useState(true)
     const toggleCheckbox = () => setChecked(!checked);
+    const [fullName, setFullName] = useState("")
+    const [phoneNumber, setPhoneNumber] = useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAcyj5Sh9Isv6eLHfnPWyPA2gnl7Mj03oU",
+  authDomain: "fasta-60df9.firebaseapp.com",
+  databaseURL: "https://fasta-60df9-default-rtdb.firebaseio.com",
+  projectId: "fasta-60df9",
+  storageBucket: "fasta-60df9.appspot.com",
+  messagingSenderId: "243432423325",
+  appId: "1:243432423325:web:9a32395c903043fc4ab974",
+  measurementId: "G-VQW632BYGD"
+  }
+
+  if(!firebase.apps.length){
+    firebase.initializeApp(firebaseConfig)
+  }
+
+
+    const signUp = async () =>{
+      try {
+        const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, password);
+        // Optionally, you can update the user's profile information here
+        await userCredential.user.updateProfile({
+            displayName: fullName,
+        });
+
+        await firebase.firestore().collection('users').doc(userCredential.user.uid).set({
+             fullName: fullName,
+             phoneNumber: phoneNumber,
+         });
+        
+         Alert.alert("Sign up successful");
+         navigation.navigate('Signin')
+        // Redirect or perform actions after successful signup
+        console.log("User signed up successfully:", userCredential.user);
+    } catch (error) {
+        console.error("Error signing up:", error);
+        Alert.alert("Error", error.message);
+        console.log("Error message", error.message)
+    }
+    }
+
+    
   return (
     <SafeAreaView className="px-6">
       <Text className="text-[24px] mt-[30px] text-[#3A3A3A] ">
@@ -23,6 +80,8 @@ export default function Signup({ navigation }) {
           className="border border-[#A7A7A7] rounded placeholder-slate-400 text-[#3A3A3A] pl-2"
           maxLength={40}
           placeholder="Favour Chamberlain"
+          onChangeText={(text)=> setFullName(text)}
+          
         />
 
         <Text className="pt-[20px] text-[#A7A7A7]">Phone Number</Text>
@@ -31,6 +90,8 @@ export default function Signup({ navigation }) {
           maxLength={11}
           placeholder="07080136822"
           keyboardType="numeric"
+          onChangeText={(text)=> setPhoneNumber(text)}
+          
 
         />
 
@@ -39,6 +100,8 @@ export default function Signup({ navigation }) {
           className="border border-[#A7A7A7] rounded placeholder-slate-400 text-[#3A3A3A] pl-2"
           maxLength={40}
           placeholder="favourchamberlain32@gmail.com"
+          onChangeText={(text)=> setEmail(text)}
+          
         />
 
         <Text className="pt-[20px] text-[#A7A7A7]">Password</Text>
@@ -47,6 +110,8 @@ export default function Signup({ navigation }) {
           maxLength={16}
           placeholder="********"
           secureTextEntry={true}
+          onChangeText={(text)=> setPassword(text)}
+          
         />
       </View>
       
@@ -69,7 +134,10 @@ export default function Signup({ navigation }) {
       <View className="mt-[30px]">
         <Button className=""
         title="Sign up" 
-        buttonStyle={{backgroundColor: 'rgba(5, 96, 250, 1)'}}/>
+        buttonStyle={{backgroundColor: 'rgba(5, 96, 250, 1)'}}
+        onPress={signUp}
+        />
+        
       </View>
 
       <View className="flex flex-row">
