@@ -25,6 +25,7 @@ export default function Signin({ navigation }) {
         .signInWithEmailAndPassword(email, password);
         const user = userCredential.user
         const fullName = user.displayName || "Unknown"
+        const [firstName, lastName] = fullName.split(" ")
       // Redirect or perform actions after successful login
       console.log("User logged in successfully:", user);
       // Navigate to dashboard or home screen
@@ -33,7 +34,7 @@ export default function Signin({ navigation }) {
  
     
       navigation.navigate('HomeScreen', {
-        fullName: fullName
+        firstName: firstName
       });
     } catch (error) {
       console.error("Error logging in:", error);

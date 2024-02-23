@@ -42,6 +42,7 @@ export default function Signup({ navigation }) {
 
     const signUp = async () =>{
       try {
+        const [first , last] = fullName.split(' ')
         const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, password);
         // Optionally, you can update the user's profile information here
         console.log("Full name:", fullName)
@@ -50,7 +51,8 @@ export default function Signup({ navigation }) {
         });
 
         await firebase.firestore().collection('users').doc(userCredential.user.uid).set({
-             fullName: fullName,
+             firstName: first.trim(),
+             lastName: last.trim(),
              phoneNumber: phoneNumber,
          });
          

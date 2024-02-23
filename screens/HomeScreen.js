@@ -9,7 +9,7 @@ export default function HomeScreen({navigation, route}) {
 
   
   // const fullName = route.params
-  const {fullName} = route.params;
+  const {firstName} = route.params;
   const [search, setSearch] = useState("");
   const updateSearch = (search) => {
     setSearch(search);
@@ -73,7 +73,7 @@ export default function HomeScreen({navigation, route}) {
 
       <View className="bg-[#0560FA] py-5 mt-[24px] rounded-[8px] flex flex-row ">
         <View className="pl-4">
-        <Text className="text-[24px] text-white">Hello {fullName}</Text>
+        <Text className="text-[24px] text-white">Hello {firstName}</Text>
         <Text className="text-[12px] text-white">We trust you're having a great time</Text>
       </View>
       <TouchableOpacity className="pl-[74px] pt-3" onPress={() => navigation.navigate('Notification')}>
