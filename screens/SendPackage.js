@@ -149,7 +149,7 @@ const handleScheduledDeliveryClick = () => {
         />
         <View>
           <Text className="pl-2">Select Delivery type</Text>
-          <View className="flex flex-row gap-[14px]">
+          <View className="flex flex-row gap-[14px] mb-[40px]">
             <TouchableOpacity className="bg-slate-300 " onPress={handleInstantDeliveryClick} >
               <View className="items-center h-[75px] w-[159px] rounded  pt-[13px]">
               <MaterialCommunityIcons name="clock-outline" size={24} color="black" />

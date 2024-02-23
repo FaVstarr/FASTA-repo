@@ -5,6 +5,9 @@ import { CheckBox, Button } from "@rneui/themed";
 
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
+import { ToastAndroid } from "react-native";
+
+
 
 
   
@@ -29,7 +32,8 @@ export default function Signin({ navigation }) {
       // Redirect or perform actions after successful login
       console.log("User logged in successfully:", user);
       // Navigate to dashboard or home screen
-      Alert.alert("Login successful")
+      ToastAndroid.show("Login successful", 3000)
+     
       
  
     
@@ -43,6 +47,7 @@ export default function Signin({ navigation }) {
       Alert.alert("Error", error.message);
     }
   };
+  
   return (
     <SafeAreaView className="px-6">
       <Text className="text-[24px] mt-[30px] text-[#3A3A3A] ">
@@ -58,7 +63,7 @@ export default function Signin({ navigation }) {
           className="border border-[#A7A7A7] rounded placeholder-slate-400 text-[#3A3A3A] pl-2"
           maxLength={40}
           placeholder="favourchamberlain32@gmail.com"
-          onChangeText={(text)=> setEmail(text)}
+          onChangeText={(text)=> setEmail(text.trim())}
         />
 
         <Text className="pt-[20px] text-[#A7A7A7]">Password</Text>
@@ -67,7 +72,7 @@ export default function Signin({ navigation }) {
           maxLength={16}
           placeholder="********"
           secureTextEntry={true}
-          onChangeText={(text) => setPassword(text)}
+          onChangeText={(text) => setPassword(text.trim())}
         />
       </View>
 

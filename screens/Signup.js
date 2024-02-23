@@ -83,7 +83,7 @@ export default function Signup({ navigation }) {
           className="border border-[#A7A7A7] rounded placeholder-slate-400 text-[#3A3A3A] pl-2"
           maxLength={40}
           placeholder="Favour Chamberlain"
-          onChangeText={(text)=> setFullName(text)}
+          onChangeText={(text)=> setFullName(text.trim())}
           
         />
 
@@ -93,7 +93,7 @@ export default function Signup({ navigation }) {
           maxLength={11}
           placeholder="07080136822"
           keyboardType="numeric"
-          onChangeText={(text)=> setPhoneNumber(text)}
+          onChangeText={(text)=> setPhoneNumber(text.trim())}
           
 
         />
@@ -103,7 +103,7 @@ export default function Signup({ navigation }) {
           className="border border-[#A7A7A7] rounded placeholder-slate-400 text-[#3A3A3A] pl-2"
           maxLength={40}
           placeholder="favourchamberlain32@gmail.com"
-          onChangeText={(text)=> setEmail(text)}
+          onChangeText={(text)=> setEmail(text.trim())}
           
         />
 
@@ -113,7 +113,7 @@ export default function Signup({ navigation }) {
           maxLength={16}
           placeholder="********"
           secureTextEntry={true}
-          onChangeText={(text)=> setPassword(text)}
+          onChangeText={(text)=> setPassword(text.trim())}
           
         />
       </View>

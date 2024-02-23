@@ -20,7 +20,7 @@ import Profile from './screens/Profile';
 import Notification from './screens/Notification';
 import SendPackage from './screens/SendPackage';
 import DeliveryDetails from './screens/DeliveryDetails';
-
+import Toast from 'react-native-toast-message';
 
 
 
@@ -40,6 +40,8 @@ const navTheme = {
 
 export default function App() {
   
+  
+  
   const TabNavigation = ({route}) =>{
 
     const { firstName }= route.params
@@ -56,6 +58,7 @@ export default function App() {
 
 
   return (
+    
     <NavigationContainer theme={navTheme} >
         <Stack.Navigator initialRouteName='OnboardingScreen' 
         >
@@ -78,7 +81,12 @@ export default function App() {
             },
             
           }} />
-          <Stack.Screen name='DeliveryDetails' component={DeliveryDetails} options={{headerShown: false}} />
+          <Stack.Screen name='DeliveryDetails' component={DeliveryDetails} options={{
+            title: 'Send A Package',
+            headerTitleAlign: 'center',
+            headerTitleStyle: {
+              color: '#A7A7A7'
+            } }} />
           <Stack.Screen name='Wallet' component={Wallet} />
           
           
