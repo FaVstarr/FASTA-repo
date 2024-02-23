@@ -16,18 +16,28 @@ export default function Signin({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  
+
   const handleLogin = async () => {
     try {
       const userCredential = await firebase
         .auth()
         .signInWithEmailAndPassword(email, password);
+        const user = userCredential.user
+        const fullName = user.displayName || "Unknown"
       // Redirect or perform actions after successful login
-      console.log("User logged in successfully:", userCredential.user);
+      console.log("User logged in successfully:", user);
       // Navigate to dashboard or home screen
       Alert.alert("Login successful")
-      navigation.navigate('HomeScreen' , {fullName: userCredential.user.displayName || userCredential.user.email});
+      
+ 
+    
+      navigation.navigate('HomeScreen', {
+        fullName: fullName
+      });
     } catch (error) {
       console.error("Error logging in:", error);
+      
       Alert.alert("Error", error.message);
     }
   };

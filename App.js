@@ -39,10 +39,13 @@ const navTheme = {
 
 export default function App() {
   
-  const TabNavigation = () =>{
+  const TabNavigation = ({route}) =>{
+
+    const { fullName }= route.params
+
     return (
       <Tab.Navigator initialRouteName='Home' screenOptions={{headerShown: false}} labeled>
-        <Tab.Screen name='Home' component={HomeScreen} options={{ tabBarIcon:({}) =>(<Entypo name="home" size={24} color="#0560FA" />) }} />
+        <Tab.Screen name='Home' component={HomeScreen} options={{ tabBarIcon:({}) =>(<Entypo name="home" size={24} color="#0560FA" />)}} initialParams={{fullName: fullName}}/>
         <Tab.Screen name='Wallet' component={Wallet} options={{ tabBarIcon:({}) =>(<Entypo name="wallet" size={24} color="#0560FA" />) }} />
         <Tab.Screen name="Track" component={DeliveriesScreen} options={{ tabBarIcon:({}) =>(<MaterialIcons name="delivery-dining" size={24} color="#0560FA" />) }}  />
         <Tab.Screen name='Profile' component={Profile} options={{ tabBarIcon:({}) =>(<FontAwesome5 name="user-circle" size={24} color="#0560FA" />) }} />
@@ -54,9 +57,6 @@ export default function App() {
   return (
     <NavigationContainer theme={navTheme} >
         <Stack.Navigator initialRouteName='OnboardingScreen' 
-        
-        
-        
         >
           
           
@@ -67,7 +67,7 @@ export default function App() {
           <Stack.Screen name="OtpVerification" component={OtpVerification} options={{headerShown: false}} />
           <Stack.Screen name="NewPassword" component={NewPassword} options={{headerShown: false}} />
           
-          <Stack.Screen name="HomeScreen" component={TabNavigation} options={{headerShown: false}} />
+          <Stack.Screen name="HomeScreen" component={TabNavigation} options={{headerShown: false}}  />
           <Stack.Screen name='Notification' component={Notification}  />
           <Stack.Screen name='SendPackage' component={SendPackage} options={{
             title: 'Send A Package',

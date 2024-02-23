@@ -1,31 +1,59 @@
-import { View, Text, SafeAreaView, TouchableOpacity, Image, TouchableHighlight } from "react-native";
-import React, { useState } from "react";
+import { View, Text, SafeAreaView, TouchableOpacity, Image, TouchableHighlight, Alert, BackHandler } from "react-native";
+import React, { useState, useEffect } from "react";
 import { SearchBar } from "@rneui/themed";
-
-
-
-
-
-
-
-
-
-
-
-
+import firebase from "firebase/compat/app";
+import 'firebase/compat/auth'
 
 
 export default function HomeScreen({navigation, route}) {
 
-  const {fullName} = route.params
+  
+  // const fullName = route.params
+  const {fullName} = route.params;
   const [search, setSearch] = useState("");
-
   const updateSearch = (search) => {
     setSearch(search);
   };
 
+
+
   const onPress = () =>{
     console.log('was pressed')
+  }
+
+  useEffect(()=>{
+    const backAction = () =>{
+      Alert.alert(
+        'Confirm Sign Out',
+        'Are you sure you want to sign out?',
+        [
+          {
+            text: 'Cancel',
+            onPress: () => null,
+            style: 'cancel'
+          },
+          {text: 'Yes', onPress: () => handleSignOut()}
+        ],
+        {cancelable: false}
+      );
+      return true;
+    }
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction
+    )
+    return () => backHandler.remove()
+  },[])
+
+  const handleSignOut = async () =>{
+
+    try{
+      await firebase.auth().signOut()
+      navigation.navigate('Signin')
+    }catch(error){
+      console.error('Error signing out:', error);
+    }
+
   }
 
   return (

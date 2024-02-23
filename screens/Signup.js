@@ -16,7 +16,7 @@ import 'firebase/compat/auth'
 
 
 export default function Signup({ navigation }) {
-    const [checked, setChecked] = useState(true)
+    const [checked, setChecked] = useState(false)
     const toggleCheckbox = () => setChecked(!checked);
     const [fullName, setFullName] = useState("")
     const [phoneNumber, setPhoneNumber] = useState("")
@@ -44,6 +44,7 @@ export default function Signup({ navigation }) {
       try {
         const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, password);
         // Optionally, you can update the user's profile information here
+        console.log("Full name:", fullName)
         await userCredential.user.updateProfile({
             displayName: fullName,
         });
@@ -52,7 +53,7 @@ export default function Signup({ navigation }) {
              fullName: fullName,
              phoneNumber: phoneNumber,
          });
-        
+         
          Alert.alert("Sign up successful");
          navigation.navigate('Signin')
         // Redirect or perform actions after successful signup
@@ -120,7 +121,7 @@ export default function Signup({ navigation }) {
            checked={checked}
            onPress={toggleCheckbox}
            iconType="material-community"
-           checkedIcon="checkbox-outline"
+           checkedIcon="checkbox-marked"
            uncheckedIcon={'checkbox-blank-outline'}
            
            
