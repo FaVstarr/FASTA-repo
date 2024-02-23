@@ -39,6 +39,7 @@ export default function Signin({ navigation }) {
     
       navigation.navigate('HomeScreen', {
         firstName: firstName,
+        lastName: lastName,
         routeName: 'Home'
       });
     } catch (error) {
