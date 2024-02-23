@@ -34,7 +34,8 @@ export default function Signin({ navigation }) {
  
     
       navigation.navigate('HomeScreen', {
-        firstName: firstName
+        firstName: firstName,
+        routeName: 'Home'
       });
     } catch (error) {
       console.error("Error logging in:", error);

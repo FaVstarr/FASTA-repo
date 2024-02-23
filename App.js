@@ -19,6 +19,7 @@ import Wallet from './screens/Wallet';
 import Profile from './screens/Profile';
 import Notification from './screens/Notification';
 import SendPackage from './screens/SendPackage';
+import DeliveryDetails from './screens/DeliveryDetails';
 
 
 
@@ -45,7 +46,7 @@ export default function App() {
 
     return (
       <Tab.Navigator initialRouteName='Home' screenOptions={{headerShown: false}} labeled>
-        <Tab.Screen name='Home' component={HomeScreen} options={{ tabBarIcon:({}) =>(<Entypo name="home" size={24} color="#0560FA" />)}} initialParams={{firstName: firstName}}/>
+        <Tab.Screen name='Home' component={HomeScreen} options={{ tabBarIcon:({}) =>(<Entypo name="home" size={24} color="#0560FA" />)}} initialParams={{firstName: firstName, routeName: 'Home'}}/>
         <Tab.Screen name='Wallet' component={Wallet} options={{ tabBarIcon:({}) =>(<Entypo name="wallet" size={24} color="#0560FA" />) }} />
         <Tab.Screen name="Track" component={DeliveriesScreen} options={{ tabBarIcon:({}) =>(<MaterialIcons name="delivery-dining" size={24} color="#0560FA" />) }}  />
         <Tab.Screen name='Profile' component={Profile} options={{ tabBarIcon:({}) =>(<FontAwesome5 name="user-circle" size={24} color="#0560FA" />) }} />
@@ -77,6 +78,7 @@ export default function App() {
             },
             
           }} />
+          <Stack.Screen name='DeliveryDetails' component={DeliveryDetails} options={{headerShown: false}} />
           <Stack.Screen name='Wallet' component={Wallet} />
           
           

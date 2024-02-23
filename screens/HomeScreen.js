@@ -9,7 +9,7 @@ export default function HomeScreen({navigation, route}) {
 
   
   // const fullName = route.params
-  const {firstName} = route.params;
+  const {firstName, routeName} = route.params;
   const [search, setSearch] = useState("");
   const updateSearch = (search) => {
     setSearch(search);
@@ -17,33 +17,36 @@ export default function HomeScreen({navigation, route}) {
 
 
 
-  const onPress = () =>{
-    console.log('was pressed')
-  }
+
 
   useEffect(()=>{
     const backAction = () =>{
-      Alert.alert(
-        'Confirm Sign Out',
-        'Are you sure you want to sign out?',
-        [
-          {
-            text: 'Cancel',
-            onPress: () => null,
-            style: 'cancel'
-          },
-          {text: 'Yes', onPress: () => handleSignOut()}
-        ],
-        {cancelable: false}
-      );
-      return true;
+      if (routeName === 'Home'){
+        Alert.alert(
+          'Confirm Sign Out',
+          'Are you sure you want to sign out?',
+          [
+            {
+              text: 'Cancel',
+              onPress: () => null,
+              style: 'cancel'
+            },
+            {text: 'Yes', onPress: handleSignOut}
+          ],
+          {cancelable: false}
+        );
+        return true;
+      }else{
+        return false;
+      }
+      
     }
     const backHandler = BackHandler.addEventListener(
       'hardwareBackPress',
       backAction
     )
     return () => backHandler.remove()
-  },[])
+  },[navigation, routeName])
 
   const handleSignOut = async () =>{
 
@@ -91,7 +94,7 @@ export default function HomeScreen({navigation, route}) {
 
         {/* 1st 2 cards */}
         <View className="flex flex-row gap-[23px]">
-        <TouchableOpacity onPress={onPress}>
+        <TouchableOpacity >
           <View className="bg-[#F2F2F2] w-[159px] h-[159px] pt-[20px] pl-2 rounded-[8px] ">
             <Image source={require('../assets/images/healthicons_call-centre.png')} />
             <Text className="text-[16px] text-[#0560FA]">Customer care</Text>
