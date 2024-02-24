@@ -21,7 +21,7 @@ import Notification from './screens/Notification';
 import SendPackage from './screens/SendPackage';
 import DeliveryDetails from './screens/DeliveryDetails';
 import Toast from 'react-native-toast-message';
-import Payment from './screens/Payment';
+
 
 
 
@@ -89,7 +89,7 @@ export default function App() {
               color: '#A7A7A7'
             } }} />
           <Stack.Screen name='Wallet' component={Wallet} />
-          <Stack.Screen name='Payment' component={Payment} />
+          
           
           
         </Stack.Navigator>
