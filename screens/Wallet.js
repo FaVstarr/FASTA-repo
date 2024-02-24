@@ -7,22 +7,63 @@ import { Paystack, paystackProps } from 'react-native-paystack-webview';
 export default function Wallet({route, navigation}) {
 
   const {firstName, lastName} = route.params
-  const paystackWebViewRef = useRef();
+  const handlePaymentSuccess = (response) => {
+    // Handle payment success
+    console.log('Payment successful:', response);
+  };
 
-  const [showBankChannel, setShowBankChannel] = useState(false);
-  const [showTransferChannel, setShowTransferChannel] = useState(false);
-  const [showCardChannel, setShowCardChannel] = useState(false);
+  const handlePaymentCancel = () => {
+    // Handle payment cancellation
+    console.log('Payment cancelled');
+  };
 
+  
   const toggleBankChannel = () => {
-    setShowBankChannel(!showBankChannel);
+    
+    return(
+      <View>
+        <Paystack
+        paystackKey='pk_test_08555b0e5cc78a3baca110871fd0f2da7e78417f'
+        billingEmail='favourchamberlain32@gmail.com'
+        amount={""}
+        channels={['bank']}
+        onCancel={handlePaymentCancel}
+        onSuccess={handlePaymentSuccess}
+         />
+      </View>
+    )
   };
 
   const toggleTransferChannel = () => {
-    setShowTransferChannel(!showTransferChannel);
+
+    return(
+      <View>
+        <Paystack
+        paystackKey='pk_test_08555b0e5cc78a3baca110871fd0f2da7e78417f'
+        billingEmail='favourchamberlain32@gmail.com'
+        amount={""}
+        channels={['bank']}
+        onCancel={handlePaymentCancel}
+        onSuccess={handlePaymentSuccess}
+         />
+      </View>
+    )
+    
   };
 
   const toggleCardChannel = () => {
-    setShowCardChannel(!showCardChannel);
+    return(
+      <View>
+        <Paystack
+        paystackKey='pk_test_08555b0e5cc78a3baca110871fd0f2da7e78417f'
+        billingEmail='favourchamberlain32@gmail.com'
+        amount={""}
+        channels={['card']}
+        onCancel={handlePaymentCancel}
+        onSuccess={handlePaymentSuccess}
+         />
+      </View>
+    )
   };
 
   return (
