@@ -20,6 +20,7 @@ import Profile from './screens/Profile';
 import Notification from './screens/Notification';
 import SendPackage from './screens/SendPackage';
 import DeliveryDetails from './screens/DeliveryDetails';
+import Pay from './screens/Pay'
 import Toast from 'react-native-toast-message';
 
 
@@ -89,6 +90,10 @@ export default function App() {
               color: '#A7A7A7'
             } }} />
           <Stack.Screen name='Wallet' component={Wallet} />
+          <Stack.Screen name='Pay' component={Pay} options={{
+            title: 'Top up',
+            headerBackTitleAlign: 'center'
+          }} />
           
           
           

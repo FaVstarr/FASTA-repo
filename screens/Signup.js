@@ -1,5 +1,6 @@
 import React , {useState} from "react";
 import {  Text, TextInput, View , FlatList, TouchableOpacity, Alert} from "react-native";
+import { ToastAndroid } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { CheckBox, Button } from '@rneui/themed';
 import firebase from 'firebase/compat/app';
@@ -55,8 +56,7 @@ export default function Signup({ navigation }) {
              lastName: last.trim(),
              phoneNumber: phoneNumber,
          });
-         
-         Alert.alert("Sign up successful");
+         ToastAndroid.show('Sign up successful', 3000)
          navigation.navigate('Signin')
         // Redirect or perform actions after successful signup
         console.log("User signed up successfully:", userCredential.user);

@@ -3,68 +3,11 @@ import React, { useRef, useState } from 'react'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
-import { Paystack, paystackProps } from 'react-native-paystack-webview';
+
 export default function Wallet({route, navigation}) {
 
   const {firstName, lastName} = route.params
-  const handlePaymentSuccess = (response) => {
-    // Handle payment success
-    console.log('Payment successful:', response);
-  };
-
-  const handlePaymentCancel = () => {
-    // Handle payment cancellation
-    console.log('Payment cancelled');
-  };
-
   
-  const toggleBankChannel = () => {
-    
-    return(
-      <View>
-        <Paystack
-        paystackKey='pk_test_08555b0e5cc78a3baca110871fd0f2da7e78417f'
-        billingEmail='favourchamberlain32@gmail.com'
-        amount={""}
-        channels={['bank']}
-        onCancel={handlePaymentCancel}
-        onSuccess={handlePaymentSuccess}
-         />
-      </View>
-    )
-  };
-
-  const toggleTransferChannel = () => {
-
-    return(
-      <View>
-        <Paystack
-        paystackKey='pk_test_08555b0e5cc78a3baca110871fd0f2da7e78417f'
-        billingEmail='favourchamberlain32@gmail.com'
-        amount={""}
-        channels={['bank']}
-        onCancel={handlePaymentCancel}
-        onSuccess={handlePaymentSuccess}
-         />
-      </View>
-    )
-    
-  };
-
-  const toggleCardChannel = () => {
-    return(
-      <View>
-        <Paystack
-        paystackKey='pk_test_08555b0e5cc78a3baca110871fd0f2da7e78417f'
-        billingEmail='favourchamberlain32@gmail.com'
-        amount={""}
-        channels={['card']}
-        onCancel={handlePaymentCancel}
-        onSuccess={handlePaymentSuccess}
-         />
-      </View>
-    )
-  };
 
   return (
     
@@ -83,19 +26,19 @@ export default function Wallet({route, navigation}) {
         <Text className="pb-4 text-[16px] font-bold text-[#3A3A3A]" >Top Up</Text>
         <View className="flex flex-row gap-[50px]">
           <View>
-          <TouchableOpacity className='bg-[#0560FA] py-[14px] px-[14px] rounded-[49px]' onPress={toggleBankChannel}>
+          <TouchableOpacity className='bg-[#0560FA] py-[14px] px-[14px] rounded-[49px] ' onPress={() => navigation.navigate('Pay')}>
           <MaterialCommunityIcons name="bank" size={24} color="white" />
           </TouchableOpacity>
           <Text className="pl-2 text-[12px] text-[#3A3A3A]">Bank</Text>
           </View>
           <View>
-          <TouchableOpacity className='bg-[#0560FA] py-[14px] px-[14px] rounded-[49px]' onPress={toggleTransferChannel}>
+          <TouchableOpacity className='bg-[#0560FA] py-[14px] px-[14px] rounded-[49px]' onPress={() => navigation.navigate('Pay')} >
           <FontAwesome name="exchange" size={24} color="white" style={{paddingLeft: 5}}/>
           </TouchableOpacity>
           <Text className="pl-2 text-[12px] text-[#3A3A3A]">Transfer</Text>
           </View>
           <View>
-          <TouchableOpacity className='bg-[#0560FA] py-[14px] px-[14px] rounded-[49px]' onPress={toggleCardChannel}>
+          <TouchableOpacity className='bg-[#0560FA] py-[14px] px-[14px] rounded-[49px]' onPress={() => navigation.navigate('Pay')} >
           <Ionicons name="card-sharp" size={24} color="white" />
           </TouchableOpacity>
           <Text className="pl-2 text-[12px] text-[#3A3A3A]">Card</Text>
