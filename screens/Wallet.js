@@ -11,19 +11,19 @@ export default function Wallet({route, navigation}) {
 
   const TopUpBank = () => {
     navigation.navigate('Pay', {
-      channel: ['bank']
+      channels: ['bank']
     })
   }
 
   const TopUpTransfer = () =>{
     navigation.navigate('Pay', {
-      channel: ['bank']
+      channels: ['transfer']
     })
   }
 
   const TopUpCard = () =>{
     navigation.navigate('Pay', {
-      channel: ['card']
+      channels: ['card']
     })
   }
   

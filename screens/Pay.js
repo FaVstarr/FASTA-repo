@@ -10,10 +10,14 @@ export default function Pay() {
   const [amount, setAmount] = useState("");
   const [isPaymentInitiated, setPaymentInitiated] = useState(false)
 
-  const channel = route.params
+  const channels = route.params
 
   const handlePayment = () =>{
     
+    if (!amount){
+      Alert.alert("Error", "Please Enter an Amount")
+      return
+    }
 
     setPaymentInitiated(true)
   }
@@ -48,7 +52,7 @@ export default function Pay() {
     paystackKey="pk_test_08555b0e5cc78a3baca110871fd0f2da7e78417f"
     billingEmail="favourchamberlain32@gmail.com"
     amount={amount}
-    channels={channel}
+    channels={channels}
     onCancel={(e) => {
       console.log('Cancelled Top up')
       setPaymentInitiated(false)
