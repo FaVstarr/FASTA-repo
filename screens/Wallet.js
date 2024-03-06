@@ -7,6 +7,25 @@ import { Ionicons } from '@expo/vector-icons';
 export default function Wallet({route, navigation}) {
 
   const {firstName, lastName} = route.params
+
+
+  const TopUpBank = () => {
+    navigation.navigate('Pay', {
+      channel: ['bank']
+    })
+  }
+
+  const TopUpTransfer = () =>{
+    navigation.navigate('Pay', {
+      channel: ['bank']
+    })
+  }
+
+  const TopUpCard = () =>{
+    navigation.navigate('Pay', {
+      channel: ['card']
+    })
+  }
   
 
   return (
@@ -26,19 +45,19 @@ export default function Wallet({route, navigation}) {
         <Text className="pb-4 text-[16px] font-bold text-[#3A3A3A]" >Top Up</Text>
         <View className="flex flex-row gap-[50px]">
           <View>
-          <TouchableOpacity className='bg-[#0560FA] py-[14px] px-[14px] rounded-[49px] ' onPress={() => navigation.navigate('Pay')}>
+          <TouchableOpacity className='bg-[#0560FA] py-[14px] px-[14px] rounded-[49px] ' onPress={TopUpBank}>
           <MaterialCommunityIcons name="bank" size={24} color="white" />
           </TouchableOpacity>
           <Text className="pl-2 text-[12px] text-[#3A3A3A]">Bank</Text>
           </View>
           <View>
-          <TouchableOpacity className='bg-[#0560FA] py-[14px] px-[14px] rounded-[49px]' onPress={() => navigation.navigate('Pay')} >
+          <TouchableOpacity className='bg-[#0560FA] py-[14px] px-[14px] rounded-[49px]' onPress={TopUpTransfer} >
           <FontAwesome name="exchange" size={24} color="white" style={{paddingLeft: 5}}/>
           </TouchableOpacity>
           <Text className="pl-2 text-[12px] text-[#3A3A3A]">Transfer</Text>
           </View>
           <View>
-          <TouchableOpacity className='bg-[#0560FA] py-[14px] px-[14px] rounded-[49px]' onPress={() => navigation.navigate('Pay')} >
+          <TouchableOpacity className='bg-[#0560FA] py-[14px] px-[14px] rounded-[49px]' onPress={TopUpCard} >
           <Ionicons name="card-sharp" size={24} color="white" />
           </TouchableOpacity>
           <Text className="pl-2 text-[12px] text-[#3A3A3A]">Card</Text>
