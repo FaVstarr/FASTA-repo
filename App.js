@@ -93,7 +93,7 @@ export default function App() {
           <Stack.Screen name='Pay' component={Pay} options={{
             title: 'Top up',
             headerBackTitleAlign: 'center'
-          }} />
+          }}  />
           
           
           

@@ -3,14 +3,35 @@ import React, { useState, useRef } from "react";
 import { Paystack } from "react-native-paystack-webview";
 import { Button } from "@rneui/themed";
 import { useRoute } from "@react-navigation/native";
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/firestore';
+import 'firebase/compat/auth'
 
-export default function Pay() {
+export default function Pay({navigation}) {
 
   const route = useRoute()
   const [amount, setAmount] = useState("");
   const [isPaymentInitiated, setPaymentInitiated] = useState(false)
+  const [transactionHistory, setTransactionHistory] = useState([])
 
   const channels = route.params
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAcyj5Sh9Isv6eLHfnPWyPA2gnl7Mj03oU",
+  authDomain: "fasta-60df9.firebaseapp.com",
+  databaseURL: "https://fasta-60df9-default-rtdb.firebaseio.com",
+  projectId: "fasta-60df9",
+  storageBucket: "fasta-60df9.appspot.com",
+  messagingSenderId: "243432423325",
+  appId: "1:243432423325:web:9a32395c903043fc4ab974",
+  measurementId: "G-VQW632BYGD"
+  }
+
+  if(!firebase.apps.length){
+    firebase.initializeApp(firebaseConfig)
+  }
+
+
 
   const handlePayment = () =>{
     
@@ -20,6 +41,23 @@ export default function Pay() {
     }
 
     setPaymentInitiated(true)
+  }
+
+  const storeTransactionInDatabase = async (amount) =>{
+    const user = firebase.auth().currentUser;
+    if (user) {
+      const userId = user.uid;
+      try {
+        await firebase.firestore().collection('transactions').add({
+          userId: userId,
+          amount: amount,
+          timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        console.log('Transaction added to Firestore');
+      } catch (error) {
+        console.error('Error adding transaction to Firestore:', error);
+      }
+    }
   }
   
   return (
@@ -59,7 +97,12 @@ export default function Pay() {
     }}
     onSuccess={(res) => {
       console.log('Successful', res)
+      setTransactionHistory([...transactionHistory, amount]);
+      storeTransactionInDatabase(amount);
+      navigation.navigate('Home')
       setPaymentInitiated(false)
+      
+
     }}
     
     autoStart={true}
