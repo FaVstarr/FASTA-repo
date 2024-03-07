@@ -51,7 +51,9 @@ export default function Pay({navigation}) {
         await firebase.firestore().collection('transactions').add({
           userId: userId,
           amount: amount,
-          timestamp: firebase.firestore.FieldValue.serverTimestamp()
+          description: 'Top up',
+          timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+          type: 'Deposit',
         });
         console.log('Transaction added to Firestore');
       } catch (error) {
