@@ -92,7 +92,7 @@ export default function Pay({navigation}) {
     amount={amount}
     channels={channels}
     onCancel={(e) => {
-      console.log('Cancelled Top up')
+      console.log('Cancelled Top up', e)
       setPaymentInitiated(false)
     }}
     onSuccess={(res) => {
