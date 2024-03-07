@@ -56,6 +56,19 @@ export default function Pay({navigation}) {
           type: 'Deposit',
         });
         console.log('Transaction added to Firestore');
+
+        const userDoc = await firebase
+        .firestore()
+        .collection("users")
+        .doc(userId)
+        .get();
+
+        const currentBalance = userDoc.data().balance || 0;
+        await firebase
+        .firestore()
+        .collection("users")
+        .doc(userId)
+        .update({balance: currentBalance + parseFloat(amount)})
       } catch (error) {
         console.error('Error adding transaction to Firestore:', error);
       }

@@ -6,7 +6,8 @@ import {
   TouchableOpacity,
   ToastAndroid,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
+import { useFocusEffect } from '@react-navigation/native'
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
@@ -16,6 +17,7 @@ import "firebase/compat/firestore";
 export default function Wallet({ route, navigation }) {
   const { firstName, lastName } = route.params;
   const [transactionHistory, setTransactionHistory] = useState([]);
+  const [currentBalance, setCurrentBalance] = useState(0)
 
   const firebaseConfig = {
     apiKey: "AIzaSyAcyj5Sh9Isv6eLHfnPWyPA2gnl7Mj03oU",
@@ -34,7 +36,19 @@ export default function Wallet({ route, navigation }) {
 
   useEffect(() => {
     fetchTransactionHistory();
+    fetchCurrentBalance();
+
+    return () => {};
   }, []);
+
+  useFocusEffect(
+    useCallback(()=>{
+      fetchTransactionHistory();
+      fetchCurrentBalance();
+    }, [])
+  )
+
+  
 
   const fetchTransactionHistory = async () => {
     const user = firebase.auth().currentUser;
@@ -58,6 +72,20 @@ export default function Wallet({ route, navigation }) {
     }
   };
 
+  const fetchCurrentBalance = async () =>{
+    const user = firebase.auth().currentUser;
+    if (user){
+      const userId = user.uid;
+      try{
+        const userDoc = await firebase.firestore().collection("users").doc(userId).get();
+        const balance = userDoc.data()?.balance ?? 0
+        setCurrentBalance(balance)
+      }catch(error){
+        console.error("Error fetching current balance: ", error)
+      }
+    }
+  }
+
   const TopUpBank = () => {
     navigation.navigate("Pay", {
       channels: ["bank"],
@@ -76,10 +104,13 @@ export default function Wallet({ route, navigation }) {
     });
   };
 
+ 
+
   
 
   return (
     <SafeAreaView className="pl-2">
+      
       <View className="flex flex-row">
         <Image
           source={require("../assets/images/defaultProfile.jpg")}
@@ -90,7 +121,7 @@ export default function Wallet({ route, navigation }) {
             {firstName} {lastName}
           </Text>
           <Text className="pl-3 text-[12px]">
-            Current Balance:<Text className="text-[#0560FA] ">N10,712.00</Text>{" "}
+            Current Balance:<Text className="text-[#0560FA] ">N{currentBalance}</Text>{" "}
           </Text>
         </View>
       </View>
