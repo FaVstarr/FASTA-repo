@@ -76,7 +76,7 @@ export default function Wallet({ route, navigation }) {
     });
   };
 
-  const [transactionAmountColor, setTransactionAmountColor] = useState('#5cb85c')
+  
 
   return (
     <SafeAreaView className="pl-2">
@@ -167,8 +167,8 @@ export default function Wallet({ route, navigation }) {
                   { transaction.timestamp}
                 </Text>
               </View>
-              <Text className="text-[#ED3A3A] text-[12px] font-medium pl-[50px] pt-[10px]">
-                {transaction.amount}
+              <Text className={`text-[12px] font-medium pl-[50px] pt-[10px] ${transaction.description === "Top up" ? "text-green-600" : "text-red-600"}`}>
+               {transaction.description === "Top up" ? "+" : "-"} {transaction.amount}
               </Text>
             </View>
           
