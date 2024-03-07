@@ -4,7 +4,7 @@ import {
   SafeAreaView,
   Image,
   TouchableOpacity,
-  ToastAndroid,
+  ScrollView
 } from "react-native";
 import React, { useEffect, useState, useCallback } from "react";
 import { useFocusEffect } from '@react-navigation/native'
@@ -88,13 +88,13 @@ export default function Wallet({ route, navigation }) {
 
   const TopUpBank = () => {
     navigation.navigate("Pay", {
-      channels: ["bank"],
+      channels: ["bank_transfer"],
     });
   };
 
   const TopUpTransfer = () => {
     navigation.navigate("Pay", {
-      channels: ["transfer"],
+      channels: ["ussd"],
     });
   };
 
@@ -109,7 +109,8 @@ export default function Wallet({ route, navigation }) {
   
 
   return (
-    <SafeAreaView className="pl-2">
+    <ScrollView>
+      <SafeAreaView className="pl-2">
       
       <View className="flex flex-row">
         <Image
@@ -206,5 +207,7 @@ export default function Wallet({ route, navigation }) {
         ))}
       </View>
     </SafeAreaView>
+    </ScrollView>
+    
   );
 }

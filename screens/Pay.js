@@ -14,7 +14,8 @@ export default function Pay({navigation}) {
   const [isPaymentInitiated, setPaymentInitiated] = useState(false)
   const [transactionHistory, setTransactionHistory] = useState([])
 
-  const channels = route.params
+  const { channels } = route.params
+  console.log(channels)
 
   const firebaseConfig = {
     apiKey: "AIzaSyAcyj5Sh9Isv6eLHfnPWyPA2gnl7Mj03oU",
@@ -100,6 +101,8 @@ export default function Pay({navigation}) {
       </View>
 
 {isPaymentInitiated && (
+
+  
   <View style={{flex: 1}}>
   <Paystack 
     paystackKey="pk_test_08555b0e5cc78a3baca110871fd0f2da7e78417f"
@@ -110,12 +113,12 @@ export default function Pay({navigation}) {
       console.log('Cancelled Top up', e)
       setPaymentInitiated(false)
     }}
-    onSuccess={(res) => {
+    onSuccess={ async (res) => {
       console.log('Successful', res)
       setTransactionHistory([...transactionHistory, amount]);
-      storeTransactionInDatabase(amount);
-      navigation.navigate('Home')
+      await storeTransactionInDatabase(amount);
       setPaymentInitiated(false)
+      navigation.goBack()
       
 
     }}
