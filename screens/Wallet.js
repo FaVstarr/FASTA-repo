@@ -177,7 +177,7 @@ export default function Wallet({ route, navigation }) {
           
             <View
               key={index}
-              className="ml-3 flex flex-row"
+              className="ml-3 flex flex-row mb-2"
               style={{
                 shadowColor: "#000",
                 shadowOffset: {
