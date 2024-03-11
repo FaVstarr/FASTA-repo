@@ -3,6 +3,8 @@ import {  Text, TextInput, View , FlatList, TouchableOpacity, Alert} from "react
 import { ToastAndroid } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { CheckBox, Button } from '@rneui/themed';
+import { MaterialCommunityIcons } from '@expo/vector-icons'
+
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
 import 'firebase/compat/auth'
@@ -23,6 +25,16 @@ export default function Signup({ navigation }) {
     const [phoneNumber, setPhoneNumber] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [showPassword, setShowPassword] = useState(false)
+    
+
+    
+
+    const toggleShowPassword = () =>{
+      setShowPassword(!showPassword)
+      
+
+    }
 
 
   const firebaseConfig = {
@@ -40,6 +52,8 @@ export default function Signup({ navigation }) {
     firebase.initializeApp(firebaseConfig)
   }
 
+
+ 
 
     const signUp = async () =>{
       try {
@@ -108,14 +122,29 @@ export default function Signup({ navigation }) {
         />
 
         <Text className="pt-[20px] text-[#A7A7A7]">Password</Text>
+        <View className="flex-row items-center border border-[#A7A7A7] rounded">
+
         <TextInput
-          className="border border-[#A7A7A7] rounded placeholder-slate-400 text-[#3A3A3A] pl-2"
+          className=" placeholder-slate-400 text-[#3A3A3A] pl-2"
           maxLength={16}
           placeholder="********"
-          secureTextEntry={true}
+          secureTextEntry={!showPassword}
           onChangeText={(text)=> setPassword(text.trim())}
-          
+         
+
         />
+      
+      <MaterialCommunityIcons 
+                    name={showPassword ? 'eye-off' : 'eye'} 
+                    size={24} 
+                    color="#aaa"
+                    style={{marginLeft: 195}}
+                    onPress={toggleShowPassword} 
+                />
+          
+        </View> 
+      
+        
       </View>
       
       <View className="flex flex-row mt-4">

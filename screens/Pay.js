@@ -106,7 +106,7 @@ export default function Pay({navigation}) {
   <View style={{flex: 1}}>
   <Paystack 
     paystackKey="pk_test_08555b0e5cc78a3baca110871fd0f2da7e78417f"
-    billingEmail="favourchamberlain32@gmail.com"
+    billingEmail="fasta@gmail.com"
     amount={amount}
     channels={channels}
     onCancel={(e) => {
