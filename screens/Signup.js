@@ -29,6 +29,8 @@ export default function Signup({ navigation }) {
     setShowPassword(!showPassword);
   };
 
+
+
   const firebaseConfig = {
     apiKey: "AIzaSyAcyj5Sh9Isv6eLHfnPWyPA2gnl7Mj03oU",
     authDomain: "fasta-60df9.firebaseapp.com",
@@ -165,6 +167,7 @@ export default function Signup({ navigation }) {
           title="Sign up"
           buttonStyle={{ backgroundColor: "rgba(5, 96, 250, 1)" }}
           onPress={signUp}
+          disabled={!checked}
         />
       </View>
 
