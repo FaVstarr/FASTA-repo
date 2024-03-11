@@ -178,18 +178,8 @@ export default function Wallet({ route, navigation }) {
           
             <View
               key={index}
-              className="ml-3 flex flex-row mb-2"
-              style={{
-                shadowColor: "#000",
-                shadowOffset: {
-                  width: 0,
-                  height: 7,
-                },
-                shadowOpacity: 0.43,
-                shadowRadius: 9.51,
-
-                elevation: 15,
-              }}
+              className="ml-3 flex flex-row mb-2 shadow-lg"
+              
             >
               <View>
                 <Text className="pl-2 text-[16px] text-[#3A3A3A]">
