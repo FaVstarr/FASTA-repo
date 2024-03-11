@@ -122,7 +122,7 @@ export default function Wallet({ route, navigation }) {
             {firstName} {lastName}
           </Text>
           <Text className="pl-3 text-[12px]">
-            Current Balance:<Text className="text-[#0560FA] ">N{currentBalance}</Text>{" "}
+            Current Balance:<Text className="text-[#0560FA] ">₦{currentBalance}</Text>{" "}
           </Text>
         </View>
       </View>

@@ -1,5 +1,5 @@
 import React from "react";
-import { SafeAreaView, Text, View, TouchableOpacity } from "react-native";
+import { SafeAreaView, Text, View, TouchableOpacity, Image } from "react-native";
 import { useRoute } from "@react-navigation/native";
 import { Button } from "@rneui/themed";
 
@@ -22,6 +22,18 @@ export default function DeliveryDetails({ navigation }) {
     packageWorth,
     deliveryType,
   } = route.params;
+
+  const deliveriesCharges = 3000;
+
+  if(deliveryType === "Instant"){
+    deliveryTypeCharge = 800
+  }else if(deliveryType === "Scheduled"){
+    deliveryTypeCharge = 400
+  }
+
+  const taxAndServiceCharge = 200
+
+  const packageTotal = deliveryTypeCharge + deliveriesCharges + taxAndServiceCharge
 
   return (
     <SafeAreaView className="pl-5">
@@ -57,7 +69,7 @@ export default function DeliveryDetails({ navigation }) {
       <View className="flex flex-row">
         <Text className="text-[#A7A7A7] text-[12px]">Package Worth:</Text>
         <Text className="text-[#EC8000] text-[12px] pl-[180px]">
-          N{packageWorth}
+        ₦{packageWorth}
         </Text>
       </View>
       <View className="flex flex-row">
@@ -66,23 +78,30 @@ export default function DeliveryDetails({ navigation }) {
           R-7458-4567-4434-5854
         </Text>
       </View>
-
+      <Image source={require("../assets/images/Line.png")} />
       <Text className="text-[#0560FA] text-[16px]">Charges</Text>
-      <View>
+      <View className="flex-row flex">
         <Text className="text-[#A7A7A7] text-[12px]">Delivery Charges</Text>
+        <Text className="text-[#EC8000] text-[12px] pl-[190px]">₦3000</Text>
       </View>
-      <View>
+      <View className="flex-row flex">
         <Text className="text-[#A7A7A7] text-[12px]">
           {deliveryType} delivery
         </Text>
+        <Text className={`text-[#EC8000] text-[12px] ${deliveryType === 'Scheduled' ? 'pl-[180px]' : 'pl-[190px]'}`}>
+        ₦{deliveryType === "Instant" ? "800" : "400" }
+        </Text>
       </View>
-      <View>
+      <View className="flex flex-row">
         <Text className="text-[#A7A7A7] text-[12px]">
           Tax and service Charges
         </Text>
+        <Text className="text-[#EC8000] text-[12px] pl-[145px]">₦200</Text>
       </View>
-      <View>
+      <Image source={require("../assets/images/Line.png")} />
+      <View className="flex flex-row">
         <Text className="text-[#A7A7A7] text-[12px]">Package total</Text>
+        <Text className="text-[#EC8000] text-[12px] pl-[200px]">₦{packageTotal}</Text>
       </View>
       <View className="mt-[70px] flex flex-row ">
         <TouchableOpacity>

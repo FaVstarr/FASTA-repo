@@ -91,7 +91,7 @@ export default function App() {
               color: '#A7A7A7'
             } }} />
             <Stack.Screen name="DeliveriesPayment" component={DeliveriesPayment} options={{
-            title: 'Select Your Payment Method',
+            title: 'Make Payment',
             headerTitleAlign: 'center',
             headerTitleStyle: {
               color: '#A7A7A7'
