@@ -22,6 +22,7 @@ import SendPackage from './screens/SendPackage';
 import DeliveryDetails from './screens/DeliveryDetails';
 import Pay from './screens/Pay'
 import Toast from 'react-native-toast-message';
+import DeliveriesPayment from './screens/DeliveriesPayment';
 
 
 
@@ -89,6 +90,12 @@ export default function App() {
             headerTitleStyle: {
               color: '#A7A7A7'
             } }} />
+            <Stack.Screen name="DeliveriesPayment" component={DeliveriesPayment} options={{
+            title: 'Select Your Payment Method',
+            headerTitleAlign: 'center',
+            headerTitleStyle: {
+              color: '#A7A7A7'
+            } }}  />
           <Stack.Screen name='Wallet' component={Wallet} />
           <Stack.Screen name='Pay' component={Pay} options={{
             title: 'Top up',
