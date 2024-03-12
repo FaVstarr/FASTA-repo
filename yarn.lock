@@ -6901,6 +6901,11 @@ react-native-radio-buttons-group@^3.0.5:
   resolved "https://registry.npmjs.org/react-native-radio-buttons-group/-/react-native-radio-buttons-group-3.0.7.tgz"
   integrity sha512-QV0ZSJEkf0Z8kIVe38iz02FlJbJZRxeVkX8F+iRUsSspqDf0nSviouFoQqtQOw3LTJWCo59ykycRZm4NmGaJ4w==
 
+react-native-radio-buttons-group@^3.0.8:
+  version "3.0.8"
+  resolved "https://registry.yarnpkg.com/react-native-radio-buttons-group/-/react-native-radio-buttons-group-3.0.8.tgz#e49b072c4506cc2f9052ee921e81af1f5494a571"
+  integrity sha512-1xqFAp6UByW1S7U9aemaS0HwRb4RR05AGbIX0szigxz7BZhRgm7ttURMRkzaaW+4rQL/RccTYiNfdS6vRDr8Kg==
+
 react-native-ratings@^8.1.0:
   version "8.1.0"
   resolved "https://registry.npmjs.org/react-native-ratings/-/react-native-ratings-8.1.0.tgz"

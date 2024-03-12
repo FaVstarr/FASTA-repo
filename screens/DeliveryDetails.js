@@ -129,7 +129,9 @@ export default function DeliveryDetails({ navigation }) {
               backgroundColor: "#0560FA",
               borderRadius: 1,
             }}
-            onPress={()=> navigation.navigate('DeliveriesPayment')}
+            onPress={()=> navigation.navigate('DeliveriesPayment',{
+              packageTotal: packageTotal
+            })}
           />
         </TouchableOpacity>
       </View>
