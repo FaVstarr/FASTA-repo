@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { SafeAreaView, Text, View, TouchableOpacity, Image } from "react-native";
 import { useRoute } from "@react-navigation/native";
 import { Button } from "@rneui/themed";
+import * as Location from "expo-location";
+import MapViewDirections from "react-native-maps-directions";
 
 export default function DeliveryDetails({ navigation }) {
   // Use useRoute() hook to get the route object
@@ -23,6 +25,25 @@ export default function DeliveryDetails({ navigation }) {
     deliveryType,
   } = route.params;
 
+  const [arrivalTime , setArrivalTime] = useState("");
+
+  useEffect(()=>{
+    
+    const fetchData = async () =>{
+
+      try{
+        const { coords } = await location.getCurrentPositionAsync([])
+        const originCoords = `${coords.latitude}, ${coords.longitude}`;
+        const destinationCoords = `${destinationAddress.latitude}, ${destinationAddress.longitude}`;
+        
+      }catch{
+
+      }
+    }
+
+  })
+
+
   const deliveriesCharges = 3000;
 
   if(deliveryType === "Instant"){
@@ -35,6 +56,7 @@ export default function DeliveryDetails({ navigation }) {
 
   const packageTotal = deliveryTypeCharge + deliveriesCharges + taxAndServiceCharge
 
+ 
   return (
     <SafeAreaView className="pl-5">
       <Text className="text-[#0560FA] text-[16px]">Package Information</Text>

@@ -4,7 +4,8 @@ import {
   SafeAreaView,
   Image,
   TouchableOpacity,
-  ScrollView
+  ScrollView,
+  Alert
 } from "react-native";
 import React, { useEffect, useState, useCallback } from "react";
 import { useFocusEffect } from '@react-navigation/native'
@@ -81,7 +82,8 @@ export default function Wallet({ route, navigation }) {
         const balance = userDoc.data()?.balance ?? 0
         setCurrentBalance(balance)
       }catch(error){
-        console.error("Error fetching current balance: ", error)
+        Alert.alert('Error', 'Error fetching current balance, Try again later.')
+        // console.error("Error fetching current balance: ", error)
       }
     }
   }

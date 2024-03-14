@@ -21,6 +21,7 @@ export default function Signin({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("")
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -45,9 +46,24 @@ export default function Signin({ navigation }) {
         routeName: "Home",
       });
     } catch (error) {
-      console.error("Error logging in:", error);
+      // console.error("Error logging in:", error);
 
-      Alert.alert("Error", error.message);
+      // Alert.alert("Error", error.message);
+      switch(error.code){
+        case 'auth/email-already-in-use':
+              Alert.alert('Email already in use !')
+              break
+        case 'auth/missing-password':
+              Alert.alert('Please input a password !')
+              break
+        case 'auth/network-request-failed':
+              Alert.alert('Please check your internet connection, and Try again later.')
+              break
+        case 'auth/invalid-credential':
+            Alert.alert("Incorrect Email/password")
+            break
+
+      }
     }
   };
 
@@ -95,6 +111,7 @@ export default function Signin({ navigation }) {
             />
           </View>
         </View>
+        
       </View>
 
       <View className="flex flex-row gap-2">

@@ -21,7 +21,7 @@ export default function HomeScreen({navigation, route}) {
 
   useEffect(()=>{
     const backAction = () =>{
-      if (routeName === 'Home'){
+      if (navigation.isFocused()){
         Alert.alert(
           'Confirm Sign Out',
           'Are you sure you want to sign out?',
