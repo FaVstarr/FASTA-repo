@@ -82,8 +82,8 @@ export default function Wallet({ route, navigation }) {
         const balance = userDoc.data()?.balance ?? 0
         setCurrentBalance(balance)
       }catch(error){
-        Alert.alert('Error', 'Error fetching current balance, Try again later.')
-        // console.error("Error fetching current balance: ", error)
+        Alert.alert('Error', 'Error fetching current balance/Transaction history, Try again later.')
+        // Alert.error("Error fetching current balance/Transaction history: ", error)
       }
     }
   }

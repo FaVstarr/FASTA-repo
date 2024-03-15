@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Text,
   TextInput,
@@ -21,11 +21,13 @@ export default function Signin({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("")
+  
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
+
+
 
   const handleLogin = async () => {
     try {
@@ -37,6 +39,7 @@ export default function Signin({ navigation }) {
       const [firstName, lastName] = fullName.split(" ");
       // Redirect or perform actions after successful login
       console.log("User logged in successfully:", user);
+      
       // Navigate to dashboard or home screen
       ToastAndroid.show("Login successful", 3000);
 
