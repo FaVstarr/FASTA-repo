@@ -23,6 +23,7 @@ export default function DeliveryDetails({ navigation }) {
     packageType,
     packageWorth,
     deliveryType,
+    date
   } = route.params;
 
   const [arrivalTime , setArrivalTime] = useState("");
@@ -94,6 +95,12 @@ export default function DeliveryDetails({ navigation }) {
         ₦{packageWorth}
         </Text>
       </View>
+      {deliveryType === 'Scheduled' && (<View className="flex flex-row">
+        <Text className="text-[#A7A7A7] text-[12px]">Date:</Text>
+        <Text className="text-[#EC8000] text-[12px] pl-[180px]">
+        {date}
+        </Text>
+      </View>)}
       <View className="flex flex-row">
         <Text className="text-[#A7A7A7] text-[12px]">Tracking Number:</Text>
         <Text className="text-[#EC8000] text-[12px] pl-[65px]">

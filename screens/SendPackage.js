@@ -3,6 +3,7 @@ import React, {useState, useEffect} from 'react'
 import { MaterialIcons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 export default function SendPackage({navigation}) {
 
@@ -17,6 +18,7 @@ const [destinationLandMark, setDestinationLandMark] = useState("")
 const [packageItem, setPackageItem] = useState("")
 const [packageType, setPackageType] = useState("")
 const[packageWorth, setPackageWorth] = useState("")
+const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
 const handleInstantDeliveryClick = () =>{
   navigation.navigate('DeliveryDetails', {
@@ -36,7 +38,7 @@ const handleInstantDeliveryClick = () =>{
   })
 }
 
-const handleScheduledDeliveryClick = () => {
+const handleScheduledDeliveryClick = (date) => {
   navigation.navigate('DeliveryDetails', {
     originAddress,
     originState,
@@ -49,9 +51,24 @@ const handleScheduledDeliveryClick = () => {
     packageItem,
     packageType,
     packageWorth,
-    deliveryType: 'Scheduled'
+    deliveryType: 'Scheduled',
+    date: date.toDateString()
     
   });
+};
+
+const showDatePicker = () => {
+  setDatePickerVisibility(true);
+};
+
+const hideDatePicker = () => {
+  setDatePickerVisibility(false);
+};
+
+const handleConfirm = (date) => {
+  handleScheduledDeliveryClick(date)
+  console.warn("A date has been picked: ", date);
+  hideDatePicker();
 };
 
 
@@ -159,13 +176,19 @@ const handleScheduledDeliveryClick = () => {
               </View>
             </TouchableOpacity>
             {/* Scheduled delivery */}
-            <TouchableOpacity className="bg-slate-300" onPress={handleScheduledDeliveryClick}>
+            <TouchableOpacity className="bg-slate-300" onPress={showDatePicker}>
               <View className="items-center  h-[75px] w-[159px] rounded px-2 mb-3  pt-[13px]">
               <FontAwesome5 name="calendar-alt" size={24} color="black" />
               <Text>Scheduled Delivery</Text>
               </View>
             </TouchableOpacity>
           </View>
+          <DateTimePickerModal
+        isVisible={isDatePickerVisible}
+        mode="date"
+        onConfirm={handleConfirm}
+        onCancel={hideDatePicker}
+      />
         </View>
       </ScrollView>
     </SafeAreaView>

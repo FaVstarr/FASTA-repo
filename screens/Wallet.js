@@ -64,7 +64,7 @@ export default function Wallet({ route, navigation }) {
         const transactions = snapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
-          timestamp: doc.data().timestamp.toDate().toString(), // Convert Firebase Timestamp to JavaScript Date object
+          timestamp: doc.data().timestamp.toDate().toDateString(), // Convert Firebase Timestamp to JavaScript Date object
         }));
         setTransactionHistory(transactions);
       } catch (error) {
@@ -191,7 +191,7 @@ export default function Wallet({ route, navigation }) {
                   { transaction.timestamp}
                 </Text>
               </View>
-              <Text className={`text-[12px] font-medium pl-[50px] pt-[10px] ${transaction.description === "Top up" ? "text-green-600" : "text-red-600"}`}>
+              <Text className={`text-[12px] font-medium pl-[190px] pt-[10px] ${transaction.description === "Top up" ? "text-green-600" : "text-red-600"}`}>
                {transaction.description === "Top up" ? "+" : "-"} {transaction.amount}
               </Text>
             </View>
