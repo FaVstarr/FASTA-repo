@@ -4,8 +4,7 @@ import {
   SafeAreaView,
   Image,
   TouchableOpacity,
-  ScrollView,
-  Alert
+  ScrollView
 } from "react-native";
 import React, { useEffect, useState, useCallback } from "react";
 import { useFocusEffect } from '@react-navigation/native'
@@ -82,8 +81,7 @@ export default function Wallet({ route, navigation }) {
         const balance = userDoc.data()?.balance ?? 0
         setCurrentBalance(balance)
       }catch(error){
-        Alert.alert('Error', 'Error fetching current balance/Transaction history, Try again later.')
-        // Alert.error("Error fetching current balance/Transaction history: ", error)
+        console.error("Error fetching current balance: ", error)
       }
     }
   }
@@ -124,7 +122,7 @@ export default function Wallet({ route, navigation }) {
             {firstName} {lastName}
           </Text>
           <Text className="pl-3 text-[12px]">
-            Current Balance:<Text className="text-[#0560FA] ">₦{currentBalance}</Text>{" "}
+            Current Balance:<Text className="text-[#0560FA] ">N{currentBalance}</Text>{" "}
           </Text>
         </View>
       </View>
@@ -180,8 +178,18 @@ export default function Wallet({ route, navigation }) {
           
             <View
               key={index}
-              className="ml-3 flex flex-row mb-2 shadow-lg"
-              
+              className="ml-3 flex flex-row mb-2"
+              style={{
+                shadowColor: "#000",
+                shadowOffset: {
+                  width: 0,
+                  height: 7,
+                },
+                shadowOpacity: 0.43,
+                shadowRadius: 9.51,
+
+                elevation: 15,
+              }}
             >
               <View>
                 <Text className="pl-2 text-[16px] text-[#3A3A3A]">

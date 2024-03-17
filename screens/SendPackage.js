@@ -31,8 +31,7 @@ const handleInstantDeliveryClick = () =>{
     packageItem,
     packageType,
     packageWorth,
-    deliveryType: 'Instant',
-    
+    deliveryType: 'Instant'
   })
 }
 
@@ -50,7 +49,6 @@ const handleScheduledDeliveryClick = () => {
     packageType,
     packageWorth,
     deliveryType: 'Scheduled'
-    
   });
 };
 
