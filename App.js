@@ -22,7 +22,6 @@ import SendPackage from './screens/SendPackage';
 import DeliveryDetails from './screens/DeliveryDetails';
 import Pay from './screens/Pay'
 import Toast from 'react-native-toast-message';
-import DeliveriesPayment from './screens/DeliveriesPayment';
 
 
 
@@ -51,7 +50,7 @@ export default function App() {
 
     return (
       <Tab.Navigator initialRouteName='Home' screenOptions={{headerShown: false}} labeled>
-        <Tab.Screen name='Home' component={HomeScreen} options={{ tabBarIcon:({}) =>(<Entypo name="home" size={24} color="#0560FA" />)}} initialParams={{firstName: firstName, routeName: 'Home' }}/>
+        <Tab.Screen name='Home' component={HomeScreen} options={{ tabBarIcon:({}) =>(<Entypo name="home" size={24} color="#0560FA" />)}} initialParams={{firstName: firstName, routeName: 'Home'}}/>
         <Tab.Screen name='Wallet' component={Wallet} options={{ tabBarIcon:({}) =>(<Entypo name="wallet" size={24} color="#0560FA" />), headerShown: true, headerTitleAlign: 'center' }} initialParams={{firstName: firstName, lastName: lastName}} />
         <Tab.Screen name="Track" component={DeliveriesScreen} options={{ tabBarIcon:({}) =>(<MaterialIcons name="delivery-dining" size={24} color="#0560FA" />) }}  />
         <Tab.Screen name='Profile' component={Profile} options={{ tabBarIcon:({}) =>(<FontAwesome5 name="user-circle" size={24} color="#0560FA" />) }} />
@@ -90,12 +89,6 @@ export default function App() {
             headerTitleStyle: {
               color: '#A7A7A7'
             } }} />
-            <Stack.Screen name="DeliveriesPayment" component={DeliveriesPayment} options={{
-            title: 'Make Payment',
-            headerTitleAlign: 'center',
-            headerTitleStyle: {
-              color: '#A7A7A7'
-            } }}  />
           <Stack.Screen name='Wallet' component={Wallet} />
           <Stack.Screen name='Pay' component={Pay} options={{
             title: 'Top up',
