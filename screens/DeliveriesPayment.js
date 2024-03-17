@@ -7,6 +7,7 @@ import { useRoute } from "@react-navigation/native";
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
 import 'firebase/compat/auth'
+import { ToastAndroid } from "react-native";
 
 
 export default function DeliveriesPayment({navigation}) {
@@ -89,10 +90,12 @@ export default function DeliveriesPayment({navigation}) {
                     storeTransactionInDatabase(packageTotal)
                     .then((success) => {
                         if (success){
+                          
                             setTransactionHistory([...transactionHistory, packageTotal]);
                                         navigation.navigate('HomeScreen', {
                                             screen: 'Track'
                                         });
+                               ToastAndroid.show('Payment successful, redirecting...', 3000)         
                         }
                     })
                 })
