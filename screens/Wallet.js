@@ -90,13 +90,13 @@ export default function Wallet({ route, navigation }) {
 
   const TopUpBank = () => {
     navigation.navigate("Pay", {
-      channels: ["bank_transfer"],
+      channels: ["bank"],
     });
   };
 
   const TopUpTransfer = () => {
     navigation.navigate("Pay", {
-      channels: ["ussd"],
+      channels: ["bank_transfer"],
     });
   };
 

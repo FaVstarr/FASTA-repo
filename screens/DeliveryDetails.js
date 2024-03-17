@@ -23,26 +23,50 @@ export default function DeliveryDetails({ navigation }) {
     packageType,
     packageWorth,
     deliveryType,
-    date
+    date,
+    trackingNumber,
   } = route.params;
 
-  const [arrivalTime , setArrivalTime] = useState("");
+  
 
-  useEffect(()=>{
-    
-    const fetchData = async () =>{
+  const [deliveryInfo, setDeliveryInfo] = useState({
+    originAddress,
+    originState,
+    originPhoneNumber,
+    originLandMark,
+    destinationAddress,
+    destinationState,
+    destinationPhoneNumber,
+    destinationLandMark,
+    packageItem,
+    packageType,
+    packageWorth,
+    deliveryType,
+    date,
+    trackingNumber,
+  });
 
-      try{
-        const { coords } = await location.getCurrentPositionAsync([])
-        const originCoords = `${coords.latitude}, ${coords.longitude}`;
-        const destinationCoords = `${destinationAddress.latitude}, ${destinationAddress.longitude}`;
-        
-      }catch{
 
-      }
-    }
-
-  })
+console.log(date)
+  useEffect(() => {
+    // Update deliveryInfo whenever route params change
+    setDeliveryInfo({
+    originAddress,
+    originState,
+    originPhoneNumber,
+    originLandMark,
+    destinationAddress,
+    destinationState,
+    destinationPhoneNumber,
+    destinationLandMark,
+    packageItem,
+    packageType,
+    packageWorth,
+    deliveryType,
+    date,
+    trackingNumber,
+    });
+  }, []);
 
 
   const deliveriesCharges = 3000;
@@ -59,7 +83,7 @@ export default function DeliveryDetails({ navigation }) {
 
  
   return (
-    <SafeAreaView className="pl-5">
+    <SafeAreaView className="px-5">
       <Text className="text-[#0560FA] text-[16px]">Package Information</Text>
       <Text className="text-[#3A3A3A] text-[12px]">Origin Details</Text>
       <Text className="text-[#A7A7A7] text-[12px]">
@@ -104,7 +128,7 @@ export default function DeliveryDetails({ navigation }) {
       <View className="flex flex-row">
         <Text className="text-[#A7A7A7] text-[12px]">Tracking Number:</Text>
         <Text className="text-[#EC8000] text-[12px] pl-[65px]">
-          R-7458-4567-4434-5854
+          {trackingNumber}
         </Text>
       </View>
       <Image source={require("../assets/images/Line.png")} />
@@ -159,7 +183,8 @@ export default function DeliveryDetails({ navigation }) {
               borderRadius: 1,
             }}
             onPress={()=> navigation.navigate('DeliveriesPayment',{
-              packageTotal: packageTotal
+              packageTotal: packageTotal,
+              deliveryInfo: deliveryInfo
             })}
           />
         </TouchableOpacity>

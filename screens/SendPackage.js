@@ -20,7 +20,13 @@ const [packageType, setPackageType] = useState("")
 const[packageWorth, setPackageWorth] = useState("")
 const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
+
+
+
 const handleInstantDeliveryClick = () =>{
+  const today = new Date();
+  const date =  today.toDateString() 
+
   navigation.navigate('DeliveryDetails', {
     originAddress,
     originState,
@@ -34,6 +40,8 @@ const handleInstantDeliveryClick = () =>{
     packageType,
     packageWorth,
     deliveryType: 'Instant',
+    date: date,
+    trackingNumber: trackingNumber.toString()
     
   })
 }
@@ -52,7 +60,8 @@ const handleScheduledDeliveryClick = (date) => {
     packageType,
     packageWorth,
     deliveryType: 'Scheduled',
-    date: date.toDateString()
+    date: date.toDateString(),
+    trackingNumber: trackingNumber.toString()
     
   });
 };
@@ -67,9 +76,23 @@ const hideDatePicker = () => {
 
 const handleConfirm = (date) => {
   handleScheduledDeliveryClick(date)
-  console.warn("A date has been picked: ", date);
   hideDatePicker();
 };
+
+const generateTrackingNumber = () => {
+  // Generate four random 4-digit numbers
+  const randomNumber1 = Math.floor(1000 + Math.random() * 9000);
+  const randomNumber2 = Math.floor(1000 + Math.random() * 9000);
+  const randomNumber3 = Math.floor(1000 + Math.random() * 9000);
+  const randomNumber4 = Math.floor(1000 + Math.random() * 9000);
+
+  // Construct the tracking number in the desired format
+  const trackingNumber = `R-${randomNumber1}-${randomNumber2}-${randomNumber3}-${randomNumber4}`;
+
+  return trackingNumber;
+};
+
+const trackingNumber = generateTrackingNumber();
 
 
   return (
