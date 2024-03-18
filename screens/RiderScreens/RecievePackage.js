@@ -111,12 +111,13 @@ const handleDeclineDelivery = async (requestId) => {
               
               <View key={request.id} className="shadow ">
                 <Text className="text-[20px]">Receive Delivery?</Text>
-                <Text className="pt-4">Destination Address: {request.destinationAddress}</Text>
-                <Text>Origin Address: {request.originAddress}</Text>
-                <Text>Tracking ID: {request.trackingNumber} </Text>
+                <Text className="pt-4">Destination Address: <Text className="text-[#EC8000]">{request.destinationAddress}</Text> </Text>
+                <Text>Origin Address: <Text className="text-[#EC8000]">{request.originAddress}</Text></Text>
+                <Text>Sender's Phone Number: <Text className="text-[#EC8000]">{request.originPhoneNumber}</Text>  </Text>
+                <Text>Tracking ID: <Text className="text-[#EC8000]">{request.trackingNumber}</Text>  </Text>
                 <View className="flex-row flex pt-5 ">
-                <Button title="Accept" buttonStyle={{width: 80 , backgroundColor: "green"}} />
-                <Button title="Decline" buttonStyle={{width: 80 , backgroundColor: "red", marginLeft: 8}}/>
+                <Button title="Accept" buttonStyle={{width: 80 , backgroundColor: "green"}} onPress={handleAcceptDelivery} />
+                <Button title="Decline" buttonStyle={{width: 80 , backgroundColor: "red", marginLeft: 8}} onPress={handleDeclineDelivery}/>
                 </View>
               </View>
             ))}
