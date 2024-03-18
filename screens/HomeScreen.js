@@ -52,6 +52,7 @@ export default function HomeScreen({navigation, route}) {
 
     try{
       await firebase.auth().signOut()
+      await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE)
       navigation.navigate('Signin')
     }catch(error){
       console.error('Error signing out:', error);

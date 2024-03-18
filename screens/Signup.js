@@ -66,6 +66,7 @@ export default function Signup({ navigation }) {
           firstName: first.trim(),
           lastName: last.trim(),
           phoneNumber: phoneNumber,
+          isRider: false
         });
       ToastAndroid.show("Sign up successful", 3000);
       navigation.navigate("Signin");
@@ -174,7 +175,7 @@ export default function Signup({ navigation }) {
       <View className="flex flex-row">
         <Text className="mt-3">Already have an account?</Text>
         <TouchableOpacity onPress={() => navigation.navigate("Signin")}>
-          <Text className="pt-3 text-[#2c3546]">Sign in</Text>
+          <Text className="pt-3  text-[#0560FA]">Sign in</Text>
         </TouchableOpacity>
         
       </View>

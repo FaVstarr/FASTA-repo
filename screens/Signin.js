@@ -35,6 +35,14 @@ export default function Signin({ navigation }) {
         .auth()
         .signInWithEmailAndPassword(email, password);
       const user = userCredential.user;
+      const userDoc = await firebase
+      .firestore()
+      .collection("users")
+      .doc(user.uid)
+      .get();
+    const userData = userDoc.data();
+
+    if (userData && !userData.isRider){
       const fullName = user.displayName || "Unknown";
       const [firstName, lastName] = fullName.split(" ");
       // Redirect or perform actions after successful login
@@ -48,8 +56,15 @@ export default function Signin({ navigation }) {
         lastName: lastName,
         routeName: "Home",
       });
+    }else if(userData.isRider){
+      Alert.alert("Not A Registered Customer")
+      await firebase.auth().signOut()
+      await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE)
+
+    }
+      
     } catch (error) {
-      // console.error("Error logging in:", error);
+      console.error("Error logging in:", error);
 
       // Alert.alert("Error", error.message);
       switch(error.code){
