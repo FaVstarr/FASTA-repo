@@ -8,8 +8,9 @@ import * as Location from 'expo-location';
 export default function DeliveriesScreen() {
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
+  
   const route = useRoute()
-  const {deliveryInfo} = route.params
+  const {deliveryInfo} = route.params ?? {deliveryInfo: null}
 
   useEffect(() => {
     (async () => {
@@ -24,40 +25,65 @@ export default function DeliveriesScreen() {
     })();
   }, []);
 
+
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <View style={{height: 400 }}>
-        {location ? (
+      {deliveryInfo ? (
+        <View style={{ flex: 1 }}>
           <MapView
-            style={{ flex: 1, height: 300 }}
+            style={{ flex: 1 }}
             initialRegion={{
-              latitude: location.coords.latitude,
-              longitude: location.coords.longitude,
+              latitude: location?.coords.latitude || 0,
+              longitude: location?.coords.longitude || 0,
               latitudeDelta: 0.0922,
               longitudeDelta: 0.0421,
             }}
           >
-            <Marker
-              coordinate={{
-                latitude: location.coords.latitude,
-                longitude: location.coords.longitude,
-              }}
-              title="Your Location"
-              description="This is your current location"
-            />
+            {location && (
+              <Marker
+                coordinate={{
+                  latitude: location.coords.latitude,
+                  longitude: location.coords.longitude,
+                }}
+                title="Your Location"
+                description="This is your current location"
+              />
+            )}
           </MapView>
-        ) : (
-          <Text className="flex-1 items-center justify-center">Loading ...</Text>
-        )}
-      </View>
-      <View className="pl-5 mt-5">
-        <Text>Tracking Number</Text>
-      </View>
-      <View className="pl-5 flex">
-        
-        <Text>Tracking Number here</Text>
-      </View>
-      <View></View>
+          <View style={{ minHeight: 200, backgroundColor: 'lightgray', padding: 10 }}>
+            <Text>Tracking Number: {deliveryInfo.trackingNumber}</Text>
+            {/* Render other delivery info properties here */}
+          </View>
+        </View>
+      ) : (
+        <View style={{ flex: 1 }}>
+          <View style={{ height: 400 }}>
+            {location ? (
+              <MapView
+                style={{ flex: 1, height: 300 }}
+                initialRegion={{
+                  latitude: location.coords.latitude,
+                  longitude: location.coords.longitude,
+                  latitudeDelta: 0.0922,
+                  longitudeDelta: 0.0421,
+                }}
+              >
+                <Marker
+                  coordinate={{
+                    latitude: location.coords.latitude,
+                    longitude: location.coords.longitude,
+                  }}
+                  title="Your Location"
+                  description="This is your current location"
+                />
+              </MapView>
+            ) : (
+              <Text className="flex-1 items-center justify-center">Loading ...</Text>
+            )}
+          </View>
+        </View>
+      )}
     </SafeAreaView>
   );
 }

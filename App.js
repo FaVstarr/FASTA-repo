@@ -28,6 +28,8 @@ import RiderHomeScreen from './screens/RiderScreens/RiderHomeScreen';
 import Deliveries from './screens/RiderScreens/Deliveries';
 import RidersProfile from './screens/RiderScreens/RidersProfile';
 import RiderSignup from './screens/RiderScreens/RiderSignup';
+import RiderTrack from './screens/RiderTrack';
+import RecievePackage from './screens/RiderScreens/RecievePackage';
 
 
 
@@ -79,8 +81,10 @@ export default function App() {
         {/* Define Rider screens here */}
         <Stack.Screen name="RiderSignup" component={RiderSignup} />
         <Stack.Screen name='RiderLogin' component={RiderLogin} />
-        <Stack.Screen name='RiderHomeScreen' component={RiderTabNavigation} />
+        <Stack.Screen name='RiderHomeScreen' component={RiderTabNavigation} initialParams={{isRider: true}} />
         <Stack.Screen name='Deliveries' component={Deliveries} />
+        <Stack.Screen name='ReceivePackage' component={RecievePackage}/>
+        <Stack.Screen name='RiderTrack' component={RiderTrack} />
         <Stack.Screen name='RidersProfile' component={RidersProfile} />
         {/* Add more Rider screens as needed */}
       </Stack.Navigator>

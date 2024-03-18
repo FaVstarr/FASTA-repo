@@ -212,10 +212,7 @@ export default function Signup({ navigation }) {
         </TouchableOpacity>
         
       </View>
-      {/* <TouchableOpacity onPress={()=> navigation.navigate("Rider")} className="pl-[130px] mt-11 bg-[#0560FA] h-[px]  rounded-[880px]">
-        <MaterialCommunityIcons name="motorbike" size={50} color="white" />
-        <Text className="pl-[0px] text-white text-[20px]">As a Rider</Text>
-      </TouchableOpacity> */}
+      
       
     </SafeAreaView>
     </ScrollView>

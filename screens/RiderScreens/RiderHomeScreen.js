@@ -21,7 +21,7 @@ export default function HomeScreen({navigation, route}) {
 
   useEffect(()=>{
     const backAction = () =>{
-      if (navigation.isFocused()){
+      if (navigation.isFocused() && routeName === 'Home'){
         Alert.alert(
           'Confirm Sign Out',
           'Are you sure you want to sign out?',
@@ -31,7 +31,7 @@ export default function HomeScreen({navigation, route}) {
               onPress: () => null,
               style: 'cancel'
             },
-            {text: 'Yes', onPress: handleSignOut}
+            {text: 'Yes', onPress: () => { handleSignOut()}}
           ],
           {cancelable: false}
         );
@@ -53,7 +53,11 @@ export default function HomeScreen({navigation, route}) {
     try{
       await firebase.auth().signOut()
       await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE)
-      navigation.navigate('Signin')
+      navigation.reset({
+        index: 0,
+        routes: [{ name: "RiderSignup" }],
+      });
+
     }catch(error){
       console.error('Error signing out:', error);
     }
@@ -105,26 +109,26 @@ export default function HomeScreen({navigation, route}) {
         <TouchableOpacity onPress={()=> navigation.navigate('SendPackage')}>
           <View className="bg-[#F2F2F2] w-[159px] h-[159px] pt-[35px] pl-2 rounded-[8px]">
             {/* <Image source={require('.../assets/images/codicon_package.png')} /> */}
-            <Text className="text-[16px] text-[#0560FA]">Send a package</Text>
-            <Text className="text-[7.45px] block">Request for a driver to pick up or deliver your package for you</Text>
+            <Text className="text-[16px] text-[#0560FA]">Receive a package</Text>
+            <Text className="text-[7.45px] block">Receive request for deliveries or pickups</Text>
           </View>
         </TouchableOpacity>
         </View>
 
         {/* 2nd 2 cards */}
         <View className="flex flex-row gap-[23px] mt-[24px]">
-        <TouchableOpacity onPress={() => navigation.navigate('Wallet')}>
+        <TouchableOpacity onPress={() => navigation.navigate('Deliveries')}>
           <View className="bg-[#F2F2F2] w-[159px] h-[159px] pt-[20px] pl-2 rounded-[8px]">
             {/* <Image source={require('.../assets/images/wallet.png')} /> */}
-            <Text className="text-[16px] text-[#0560FA]">Fund your wallet</Text>
-            <Text className="text-[7.45px] block">To fund your wallet is as easy as ABC, make use of our fast technology and top-up your wallet today</Text>
+            <Text className="text-[16px] text-[#0560FA]">Ongoing deliveries</Text>
+            <Text className="text-[7.45px] block">keep track of pending deliveries</Text>
           </View>
         </TouchableOpacity>
         <TouchableOpacity className="">
           <View className="bg-[#F2F2F2] w-[159px] h-[159px] pt-[35px] pl-2 rounded-[8px] ">
             {/* <Image source={require('.../assets/images/Vector.png')} className="" /> */}
-            <Text className="text-[16px] text-[#0560FA]">Book a Rider</Text>
-            <Text className="text-[7.45px] block">Search for available driver within your area</Text>
+            <Text className="text-[16px] text-[#0560FA]">Track</Text>
+            <Text className="text-[7.45px] block">View map and locations for easy navigation</Text>
           </View>
         </TouchableOpacity>
         </View>

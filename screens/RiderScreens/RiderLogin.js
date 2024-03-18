@@ -27,6 +27,21 @@ export default function Signin({ navigation }) {
     setShowPassword(!showPassword);
   };
 
+  const firebaseConfig = {
+    apiKey: "AIzaSyAcyj5Sh9Isv6eLHfnPWyPA2gnl7Mj03oU",
+    authDomain: "fasta-60df9.firebaseapp.com",
+    databaseURL: "https://fasta-60df9-default-rtdb.firebaseio.com",
+    projectId: "fasta-60df9",
+    storageBucket: "fasta-60df9.appspot.com",
+    messagingSenderId: "243432423325",
+    appId: "1:243432423325:web:9a32395c903043fc4ab974",
+    measurementId: "G-VQW632BYGD",
+  };
+
+  if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+  }
+
 
 
   const handleLogin = async () => {
@@ -52,11 +67,16 @@ export default function Signin({ navigation }) {
           firstName: firstName,
           lastName: lastName,
           routeName: "Home",
+          isRider: userData.isRider
         });
-      }else if(!userData.isRider){
+      }else{
         Alert.alert("Not A Registered Rider")
-        await firebase.auth().signOut()
-        await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE)
+        // await firebase.auth().signOut()
+        // await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE)
+        navigation.reset({
+          index: 0,
+          routes: [{ name: "RiderSignup" }],
+        });
       }
 
      
@@ -162,7 +182,7 @@ export default function Signin({ navigation }) {
 
       <View className="flex flex-row">
         <Text className="mt-3">Don't have an account?</Text>
-        <TouchableOpacity onPress={() => navigation.goBack("RiderSignup")}>
+        <TouchableOpacity onPress={() => navigation.navigate("RiderSignup")}>
           <Text className="pt-3 text-[#0560FA]">Sign up</Text>
         </TouchableOpacity>
       </View>
