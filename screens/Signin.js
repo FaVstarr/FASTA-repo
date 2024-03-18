@@ -27,6 +27,20 @@ export default function Signin({ navigation }) {
     setShowPassword(!showPassword);
   };
 
+  const firebaseConfig = {
+    apiKey: "AIzaSyAcyj5Sh9Isv6eLHfnPWyPA2gnl7Mj03oU",
+    authDomain: "fasta-60df9.firebaseapp.com",
+    databaseURL: "https://fasta-60df9-default-rtdb.firebaseio.com",
+    projectId: "fasta-60df9",
+    storageBucket: "fasta-60df9.appspot.com",
+    messagingSenderId: "243432423325",
+    appId: "1:243432423325:web:9a32395c903043fc4ab974",
+    measurementId: "G-VQW632BYGD",
+  };
+
+  if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+  }
 
 
   const handleLogin = async () => {
@@ -35,6 +49,14 @@ export default function Signin({ navigation }) {
         .auth()
         .signInWithEmailAndPassword(email, password);
       const user = userCredential.user;
+      const userDoc = await firebase
+      .firestore()
+      .collection("users")
+      .doc(user.uid)
+      .get();
+    const userData = userDoc.data();
+
+    if (userData && !userData.isRider){
       const fullName = user.displayName || "Unknown";
       const [firstName, lastName] = fullName.split(" ");
       // Redirect or perform actions after successful login
@@ -48,8 +70,15 @@ export default function Signin({ navigation }) {
         lastName: lastName,
         routeName: "Home",
       });
+    }else{
+      Alert.alert("Not A Registered Customer")
+      await firebase.auth().signOut()
+      await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE)
+
+    }
+      
     } catch (error) {
-      // console.error("Error logging in:", error);
+      console.error("Error logging in:", error);
 
       // Alert.alert("Error", error.message);
       switch(error.code){
@@ -73,7 +102,7 @@ export default function Signin({ navigation }) {
   return (
     <SafeAreaView className="px-6">
       <Text className="text-[24px] mt-[30px] text-[#3A3A3A] ">
-        Welcome Back
+        Welcome Back, Customer
       </Text>
       <Text className="text-[14px] text-[#A7A7A7]">
         Fill in your email and password to continue

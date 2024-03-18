@@ -23,11 +23,13 @@ import DeliveryDetails from './screens/DeliveryDetails';
 import Pay from './screens/Pay'
 import Toast from 'react-native-toast-message';
 import DeliveriesPayment from './screens/DeliveriesPayment';
-import Login from './screens/RiderScreens/RiderLogin';
+import RiderLogin from './screens/RiderScreens/RiderLogin';
 import RiderHomeScreen from './screens/RiderScreens/RiderHomeScreen';
 import Deliveries from './screens/RiderScreens/Deliveries';
 import RidersProfile from './screens/RiderScreens/RidersProfile';
 import RiderSignup from './screens/RiderScreens/RiderSignup';
+import RiderTrack from './screens/RiderTrack';
+import RecievePackage from './screens/RiderScreens/RecievePackage';
 
 
 
@@ -64,9 +66,10 @@ export default function App() {
     )
   }
 
-  const RiderTabNavigation = ()=>{
+  const RiderTabNavigation = ({route})=>{
+    const { firstName, lastName }= route.params
     return(
-      <Tab.Navigator>
+      <Tab.Navigator initialRouteName='Home' screenOptions={{headerShown: false}} labeled>
         <Tab.Screen name='Home' component={RiderHomeScreen} options={{ tabBarIcon:({}) =>(<Entypo name="home" size={24} color="#0560FA" />)}} initialParams={{firstName: firstName, routeName: 'Home' }}/>
       </Tab.Navigator>
     )
@@ -77,9 +80,11 @@ export default function App() {
       <Stack.Navigator initialRouteName='RiderSignup' screenOptions={{headerShown: false}}>
         {/* Define Rider screens here */}
         <Stack.Screen name="RiderSignup" component={RiderSignup} />
-        <Stack.Screen name='Login' component={Login} />
-        <Stack.Screen name='RiderHomeScreen' component={RiderTabNavigation} />
+        <Stack.Screen name='RiderLogin' component={RiderLogin} />
+        <Stack.Screen name='RiderHomeScreen' component={RiderTabNavigation} initialParams={{isRider: true}} />
         <Stack.Screen name='Deliveries' component={Deliveries} />
+        <Stack.Screen name='ReceivePackage' component={RecievePackage}/>
+        <Stack.Screen name='RiderTrack' component={RiderTrack} />
         <Stack.Screen name='RidersProfile' component={RidersProfile} />
         {/* Add more Rider screens as needed */}
       </Stack.Navigator>
