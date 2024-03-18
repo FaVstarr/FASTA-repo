@@ -104,6 +104,7 @@ export default function DeliveriesPayment({ navigation }) {
                     storeDeliveryInfoInFirestore()
                     navigation.navigate("HomeScreen", {
                       screen: "Track",
+                      deliveryInfo: deliveryInfo,
                     });
                   }
                 });
@@ -160,6 +161,7 @@ export default function DeliveriesPayment({ navigation }) {
       await deliveryRef.add({
         userId: userId,
         ...deliveryInfo,
+        isCompleted: false,
         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
       });
   
@@ -210,6 +212,7 @@ export default function DeliveriesPayment({ navigation }) {
               setPaymentInitiated(false);
               navigation.navigate("HomeScreen", {
                 screen: "Track",
+                deliveryInfo: deliveryInfo
               });
             }}
             autoStart={true}

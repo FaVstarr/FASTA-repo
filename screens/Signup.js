@@ -174,9 +174,18 @@ export default function Signup({ navigation }) {
       <View className="flex flex-row">
         <Text className="mt-3">Already have an account?</Text>
         <TouchableOpacity onPress={() => navigation.navigate("Signin")}>
-          <Text className="pt-3 text-[#0560FA]">Sign in</Text>
+          <Text className="pt-3 text-[#2c3546]">Sign in</Text>
         </TouchableOpacity>
+        
       </View>
+      {/* <TouchableOpacity onPress={()=> navigation.navigate("Rider")} className="pl-[130px] mt-11 bg-[#0560FA] h-[px]  rounded-[880px]">
+        <MaterialCommunityIcons name="motorbike" size={50} color="white" />
+        <Text className="pl-[0px] text-white text-[20px]">As a Rider</Text>
+      </TouchableOpacity> */}
+      <TouchableOpacity onPress={()=> navigation.navigate("Rider")} style={{ alignItems: 'center', marginTop: 60 }} className="bg-slate-400 mx-[80px] rounded-full">
+        <MaterialCommunityIcons name="motorbike" size={50} color="white" />
+        <Text style={{ color: 'white', fontSize: 20 }}>As a Rider</Text>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 }

@@ -23,6 +23,11 @@ import DeliveryDetails from './screens/DeliveryDetails';
 import Pay from './screens/Pay'
 import Toast from 'react-native-toast-message';
 import DeliveriesPayment from './screens/DeliveriesPayment';
+import Login from './screens/RiderScreens/RiderLogin';
+import RiderHomeScreen from './screens/RiderScreens/RiderHomeScreen';
+import Deliveries from './screens/RiderScreens/Deliveries';
+import RidersProfile from './screens/RiderScreens/RidersProfile';
+import RiderSignup from './screens/RiderScreens/RiderSignup';
 
 
 
@@ -58,6 +63,28 @@ export default function App() {
       </Tab.Navigator>
     )
   }
+
+  const RiderTabNavigation = ()=>{
+    return(
+      <Tab.Navigator>
+        <Tab.Screen name='Home' component={RiderHomeScreen} options={{ tabBarIcon:({}) =>(<Entypo name="home" size={24} color="#0560FA" />)}} initialParams={{firstName: firstName, routeName: 'Home' }}/>
+      </Tab.Navigator>
+    )
+  }
+
+  const RiderNavigator = () => {
+    return (
+      <Stack.Navigator initialRouteName='RiderSignup' screenOptions={{headerShown: false}}>
+        {/* Define Rider screens here */}
+        <Stack.Screen name="RiderSignup" component={RiderSignup} />
+        <Stack.Screen name='Login' component={Login} />
+        <Stack.Screen name='RiderHomeScreen' component={RiderTabNavigation} />
+        <Stack.Screen name='Deliveries' component={Deliveries} />
+        <Stack.Screen name='RidersProfile' component={RidersProfile} />
+        {/* Add more Rider screens as needed */}
+      </Stack.Navigator>
+    );
+  };
 
 
   return (
@@ -101,6 +128,7 @@ export default function App() {
             title: 'Top up',
             headerBackTitleAlign: 'center'
           }}  />
+          <Stack.Screen name='Rider' component={RiderNavigator} options={{headerShown: false}} />
           
           
           
