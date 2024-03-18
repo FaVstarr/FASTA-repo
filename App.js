@@ -30,6 +30,8 @@ import RidersProfile from './screens/RiderScreens/RidersProfile';
 import RiderSignup from './screens/RiderScreens/RiderSignup';
 import RiderTrack from './screens/RiderTrack';
 import RecievePackage from './screens/RiderScreens/RecievePackage';
+import Map from './screens/RiderScreens/Map';
+
 
 
 
@@ -71,21 +73,29 @@ export default function App() {
     return(
       <Tab.Navigator initialRouteName='Home' screenOptions={{headerShown: false}} labeled>
         <Tab.Screen name='Home' component={RiderHomeScreen} options={{ tabBarIcon:({}) =>(<Entypo name="home" size={24} color="#0560FA" />)}} initialParams={{firstName: firstName, routeName: 'Home' }}/>
+        <Tab.Screen name='Maps' component={Map} options={{ tabBarIcon:({}) =>(<Entypo name="map" size={24} color="#0560FA" />) }} />
+        <Tab.Screen name='Profile' component={RidersProfile} options={{ tabBarIcon:({}) =>(<FontAwesome5 name="user-circle" size={24} color="#0560FA" />) }} />
+        
       </Tab.Navigator>
     )
   }
 
   const RiderNavigator = () => {
     return (
-      <Stack.Navigator initialRouteName='RiderSignup' screenOptions={{headerShown: false}}>
+      <Stack.Navigator initialRouteName='RiderSignup' >
         {/* Define Rider screens here */}
-        <Stack.Screen name="RiderSignup" component={RiderSignup} />
-        <Stack.Screen name='RiderLogin' component={RiderLogin} />
-        <Stack.Screen name='RiderHomeScreen' component={RiderTabNavigation} initialParams={{isRider: true}} />
-        <Stack.Screen name='Deliveries' component={Deliveries} />
-        <Stack.Screen name='ReceivePackage' component={RecievePackage}/>
-        <Stack.Screen name='RiderTrack' component={RiderTrack} />
-        <Stack.Screen name='RidersProfile' component={RidersProfile} />
+        <Stack.Screen name="RiderSignup" component={RiderSignup} options={{headerShown: false}} />
+        <Stack.Screen name='RiderLogin' component={RiderLogin} options={{headerShown: false}} />
+        <Stack.Screen name='RiderHomeScreen' component={RiderTabNavigation} initialParams={{isRider: true}} options={{headerShown: false}} />
+        <Stack.Screen name='Deliveries' component={Deliveries} options={{headerShown: false}} />
+        <Stack.Screen name='ReceivePackage' component={RecievePackage} options={{
+            title: 'Package Delivery',
+            headerTitleAlign: 'center',
+            headerTitleStyle: {
+              color: '#A7A7A7'
+            } }} />
+        <Stack.Screen name='RiderTrack' component={RiderTrack} options={{headerShown: false}} />
+        <Stack.Screen name='RidersProfile' component={RidersProfile} options={{headerShown: false}} />
         {/* Add more Rider screens as needed */}
       </Stack.Navigator>
     );

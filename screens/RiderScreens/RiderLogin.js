@@ -81,7 +81,7 @@ export default function Signin({ navigation }) {
 
      
     } catch (error) {
-      // console.error("Error logging in:", error);
+      // console.error("Error logging in:", error.code);
 
       // Alert.alert("Error", error.message);
       switch(error.code){
