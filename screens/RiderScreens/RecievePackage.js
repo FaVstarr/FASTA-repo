@@ -49,6 +49,7 @@ useEffect(() => {
       // Query the delivery based on user ID and other relevant criteria
       const querySnapshot = await deliveryRef
         .where("isCompleted", "==", false)
+        .where("isAccepted", "!=" , true)
         .where("isDeclined", "==", false)
         // .where("declinedBy", "!=", userId , "&&", null)
         .orderBy("timestamp", "desc")

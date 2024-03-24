@@ -87,7 +87,13 @@ export default function App() {
         <Stack.Screen name="RiderSignup" component={RiderSignup} options={{headerShown: false}} />
         <Stack.Screen name='RiderLogin' component={RiderLogin} options={{headerShown: false}} />
         <Stack.Screen name='RiderHomeScreen' component={RiderTabNavigation} initialParams={{isRider: true}} options={{headerShown: false}} />
-        <Stack.Screen name='Deliveries' component={Deliveries} options={{headerShown: false}} />
+        <Stack.Screen name='Deliveries' component={Deliveries} options={{
+          title: 'Ongoing Deliveries',
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            color: '#A7A7A7'
+          }
+        }} />
         <Stack.Screen name='ReceivePackage' component={RecievePackage} options={{
             title: 'Package Delivery',
             headerTitleAlign: 'center',
