@@ -1,10 +1,12 @@
-import { View, Text } from 'react-native'
+import { View, Text, SafeAreaView } from 'react-native'
 import React from 'react'
 
 export default function Deliveries() {
   return (
-    <View>
-      <Text>Deliveries</Text>
-    </View>
+    <SafeAreaView>
+    
+      <Text>Ongoing Deliveries</Text>
+      
+    </SafeAreaView>
   )
 }

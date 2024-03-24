@@ -1,7 +1,8 @@
-import { View, Text, SafeAreaView } from "react-native";
+import { View, Text, SafeAreaView, Alert } from "react-native";
 import React, { useState, useEffect } from "react";
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
+import { ToastAndroid } from "react-native";
 
 import { Button } from "@rneui/themed";
 
@@ -35,19 +36,23 @@ useEffect(() => {
   const fetchDeliveryInfo = async () => {
     try {
       const user = firebase.auth().currentUser;
+     
       if (!user) {
         console.error("User not authenticated");
         return;
       }
 
       const userId = user.uid;
+      console.log('Current User ID:', userId);
       const deliveryRef = firebase.firestore().collection("deliveries");
 
       // Query the delivery based on user ID and other relevant criteria
       const querySnapshot = await deliveryRef
         .where("isCompleted", "==", false)
+        .where("isDeclined", "==", false)
+        // .where("declinedBy", "!=", userId , "&&", null)
         .orderBy("timestamp", "desc")
-        .limit(1)
+        .limit(4)
         .get();
 
         
@@ -58,7 +63,7 @@ useEffect(() => {
           id: doc.id,
           ...doc.data()
         }))
-
+        console.log('Fetching...')
         setDeliveryInfo(request)
       } else {
         console.log("No pending delivery found for the user");
@@ -69,7 +74,7 @@ useEffect(() => {
       setLoading(false);
     }
   };
-
+  console.log("Fetching delivery info...")
   fetchDeliveryInfo();
 }, []);
 
@@ -80,6 +85,7 @@ const handleAcceptDelivery = async (requestId) => {
       isAccepted: true,
       assignedTo: firebase.auth().currentUser.uid
     });
+    setDeliveryInfo(deliveryInfo.filter((delivery) => delivery.id !== requestId));
     ToastAndroid.show("Delivery accepted", ToastAndroid.SHORT);
   } catch (error) {
     console.error("Error accepting delivery:", error);
@@ -89,10 +95,13 @@ const handleAcceptDelivery = async (requestId) => {
 
 const handleDeclineDelivery = async (requestId) => {
   try {
+    console.log("Request ID:", requestId);
     const deliveryRef = firebase.firestore().collection("deliveries").doc(requestId);
     await deliveryRef.update({
       isDeclined: true,
+      declinedBy: firebase.auth().currentUser.uid
     });
+    setDeliveryInfo(deliveryInfo.filter((delivery) => delivery.id !== requestId));
     ToastAndroid.show("Delivery declined", ToastAndroid.SHORT);
   } catch (error) {
     console.error("Error declining delivery:", error);
@@ -102,22 +111,26 @@ const handleDeclineDelivery = async (requestId) => {
   return (
     <SafeAreaView>
       <View>
-      {loading ? (
+      {deliveryInfo === null ? (
           <Text>Loading...</Text>
+        ) : deliveryInfo.length === 0 ? (
+          <Text>No pending delivery found </Text>
         ) : (
           <View className="px-3">
             
-            {deliveryInfo.map((request)=> (
+            {deliveryInfo.map((request, idx)=> (
               
               <View key={request.id} className="shadow ">
                 <Text className="text-[20px]">Receive Delivery?</Text>
                 <Text className="pt-4">Destination Address: <Text className="text-[#EC8000]">{request.destinationAddress}</Text> </Text>
-                <Text>Origin Address: <Text className="text-[#EC8000]">{request.originAddress}</Text></Text>
+                <Text>Destination Landmark: <Text className="text-[#EC8000]">{request.destinationLandMark}</Text></Text>
+                <Text>Sender Address: <Text className="text-[#EC8000]">{request.originAddress}</Text></Text>
+                <Text>Sender Landmark: <Text className="text-[#EC8000]">{request.originLandMark}</Text></Text>
                 <Text>Sender's Phone Number: <Text className="text-[#EC8000]">{request.originPhoneNumber}</Text>  </Text>
                 <Text>Tracking ID: <Text className="text-[#EC8000]">{request.trackingNumber}</Text>  </Text>
                 <View className="flex-row flex pt-5 ">
-                <Button title="Accept" buttonStyle={{width: 80 , backgroundColor: "green"}} onPress={handleAcceptDelivery} />
-                <Button title="Decline" buttonStyle={{width: 80 , backgroundColor: "red", marginLeft: 8}} onPress={handleDeclineDelivery}/>
+                <Button title="Accept" buttonStyle={{width: 80 , backgroundColor: "green"}} onPress={() => handleAcceptDelivery(request.id)} />
+                <Button title="Decline" buttonStyle={{width: 80 , backgroundColor: "red", marginLeft: 8}} onPress={()=>handleDeclineDelivery(request.id)}/>
                 </View>
               </View>
             ))}

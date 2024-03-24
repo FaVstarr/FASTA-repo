@@ -1,4 +1,4 @@
-import { View, Text,TextInput, SafeAreaView, ScrollView, TouchableOpacity } from 'react-native'
+import { View, Text,TextInput, SafeAreaView, ScrollView, TouchableOpacity, Platform } from 'react-native'
 import React, {useState, useEffect} from 'react'
 import { MaterialIcons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -106,26 +106,26 @@ const trackingNumber = generateTrackingNumber();
         </View>
         {/* The Text inputs for the Send Package */}
         <TextInput
-          className="shadow py-[17px]  placeholder-slate-400 text-[#3A3A3A] pl-5"
+          className={`shadow py-[17px] border rounded-lg ${Platform.OS === 'ios' ? 'placeholder-black' : 'placeholder-slate-800' }  text-[#3A3A3A] pl-5`}
           maxLength={40}
           placeholder="Address"
           onChangeText={setOriginAddress}
         />
         <TextInput
-          className="shadow py-[17px]  placeholder-slate-400 text-[#3A3A3A] pl-5 "
+          className="shadow py-[17px] border mt-2 rounded-lg placeholder-slate-400 text-[#3A3A3A] pl-5 "
           maxLength={40}
           placeholder="State"
           onChangeText={setOriginState}
         />
         <TextInput
-          className="shadow py-[17px]  placeholder-slate-400 text-[#3A3A3A] pl-5 "
+          className="shadow py-[17px] border mt-2 rounded-lg placeholder-slate-400 text-[#3A3A3A] pl-5 "
           maxLength={11}
           placeholder="Phone number"
           keyboardType='numeric'
           onChangeText={setOriginPhoneNumber}
         />
         <TextInput
-          className="shadow py-[17px]  placeholder-slate-400 text-[#3A3A3A] pl-5 "
+          className="shadow py-[17px] border mt-2 rounded-lg placeholder-slate-400 text-[#3A3A3A] pl-5 "
           maxLength={40}
           placeholder="Landmark"
           onChangeText={setOriginLandMark}
@@ -136,30 +136,30 @@ const trackingNumber = generateTrackingNumber();
         <View className="flex flex-row gap-2">
         <MaterialIcons name="location-on" size={24} color="#0560FA" />
         {/* Origin Details Section */}
-        <Text className="text-[14px] text-[#3A3A3A] font-medium">Destination Details</Text>
+        <Text className="text-[14px]  text-[#3A3A3A] font-medium">Destination Details</Text>
         </View>
         {/* The Text inputs for the Send Package */}
         <TextInput
-          className="shadow py-[17px]  placeholder-slate-400 text-[#3A3A3A] pl-5"
+          className="shadow py-[17px] border mt-2 rounded-lg placeholder-slate-400 text-[#3A3A3A] pl-5"
           maxLength={40}
           placeholder="Address"
           onChangeText={setDestinationAddress}
         />
         <TextInput
-          className="shadow py-[17px]  placeholder-slate-400 text-[#3A3A3A] pl-5 "
+          className="shadow py-[17px] border mt-2 rounded-lg placeholder-slate-400 text-[#3A3A3A] pl-5 "
           maxLength={40}
           placeholder="State"
           onChangeText={setDestinationState}
         />
         <TextInput
-          className="shadow py-[17px]  placeholder-slate-400 text-[#3A3A3A] pl-5 "
+          className="shadow py-[17px] border mt-2 rounded-lg placeholder-slate-400 text-[#3A3A3A] pl-5 "
           maxLength={11}
           placeholder="Phone number"
           keyboardType='numeric'
           onChangeText={setDestinationPhoneNumber}
         />
         <TextInput
-          className="shadow py-[17px]  placeholder-slate-400 text-[#3A3A3A] pl-5 "
+          className="shadow py-[17px] border mt-2 rounded-lg placeholder-slate-400 text-[#3A3A3A] pl-5 "
           maxLength={40}
           placeholder="Landmark"
           onChangeText={setDestinationLandMark}
@@ -171,19 +171,19 @@ const trackingNumber = generateTrackingNumber();
         </View>
         {/* The Text inputs for the Package Items */}
         <TextInput
-          className="shadow py-[17px]  placeholder-slate-400 text-[#3A3A3A] pl-5"
+          className="shadow py-[17px] border rounded-lg placeholder-slate-400 text-[#3A3A3A] pl-5"
           maxLength={40}
           placeholder="Package items"
           onChangeText={setPackageItem}
         />
         <TextInput
-          className="shadow py-[17px]  placeholder-slate-400 text-[#3A3A3A] pl-5 "
+          className="shadow py-[17px] border mt-2 rounded-lg placeholder-slate-400 text-[#3A3A3A] pl-5 "
           maxLength={40}
           placeholder="Good type eg. Food"
           onChangeText={setPackageType}
         />
         <TextInput
-          className="shadow py-[17px]  placeholder-slate-400 text-[#3A3A3A] pl-5 "
+          className="shadow py-[17px] border mt-2 rounded-lg placeholder-slate-400 text-[#3A3A3A] pl-5 "
           maxLength={11}
           placeholder="Worth of Item"
           keyboardType='numeric'

@@ -149,12 +149,14 @@ export default function DeliveriesPayment({ navigation }) {
   const storeDeliveryInfoInFirestore = async () => {
     try {
       const user = firebase.auth().currentUser;
+      
       if (!user) {
         console.error("User not authenticated");
         return;
       }
   
       const userId = user.uid;
+      
       const deliveryRef = firebase.firestore().collection("deliveries");
   
       // Add the delivery info to Firestore
@@ -162,6 +164,8 @@ export default function DeliveriesPayment({ navigation }) {
         userId: userId,
         ...deliveryInfo,
         isCompleted: false,
+        isDeclined:false,
+        declinedBy: null,
         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
       });
   
