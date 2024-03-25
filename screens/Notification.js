@@ -79,7 +79,7 @@ export default function Notification() {
               <Text>Destination: <Text className="text-green-600">{delivery.destinationAddress}</Text></Text>
               <Text>Origin: <Text className="text-green-600" >{delivery.originAddress}</Text></Text>
               </View>
-              <Text className="bg-green-500 px-2 py-2 text-white w-[100px] mt-4 rounded-md">Completed</Text>
+              <Text className={`bg-${delivery.isCompleted ? 'green' : 'yellow'}-500 px-2 py-2 text-white w-[100px] mt-4 rounded-md`}>{delivery.isCompleted ? 'Completed' : 'Pending'}</Text>
               {/* Add more delivery details as needed */}
             </View>
           ))
