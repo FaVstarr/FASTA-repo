@@ -1,9 +1,10 @@
-import { View, Text, Image, SafeAreaView, TouchableOpacity } from 'react-native'
+import { View, Text, Image, SafeAreaView, TouchableOpacity, Alert } from 'react-native'
 import React , { useEffect, useState, useCallback}from 'react'
 import { useFocusEffect } from '@react-navigation/native'
 import { EvilIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { Octicons } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 
@@ -58,6 +59,34 @@ export default function Profile({ route, navigation }) {
     }
   }
 
+  const handleSignOut = async () =>{
+
+    try{
+      await firebase.auth().signOut()
+      await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE)
+      navigation.navigate('Signin')
+    }catch(error){
+      console.error('Error signing out:', error);
+    }
+
+  }
+
+  const signOut = ()=>{
+    Alert.alert(
+      'Confirm Sign Out',
+      'Are you sure you want to Log out?',
+      [
+        {
+          text: 'Cancel',
+          onPress: () => null,
+          style: 'cancel'
+        },
+        {text: 'Yes', onPress: handleSignOut}
+      ],
+      {cancelable: false}
+    );
+  }
+
   return (
     <SafeAreaView>
        <View className="flex flex-row">
@@ -109,12 +138,12 @@ export default function Profile({ route, navigation }) {
          </TouchableOpacity>
          {/* 4 */}
 
-         <TouchableOpacity style={{elevation:2, backgroundColor: 'white', borderRadius: 3, padding: 10, marginVertical: 5}}>
+         <TouchableOpacity style={{elevation:1, backgroundColor: 'white', borderRadius: 0, padding: 10, marginVertical: 0}} className="mt-[320px]" onPress={signOut}>
           <View className="flex-row">
-          <EvilIcons name="user" size={44} color="black" />
+          <MaterialIcons name="exit-to-app" size={44} color="red" />
           <View>
-            <Text className="text-[16px]">Edit Profile</Text>
-            <Text className="text-[#A7A7A7] text-[12px]">Name, phone no, address, email ...</Text>
+            <Text className="text-[16px] pt-2">Log out</Text>
+            
           </View>
           </View>
          </TouchableOpacity>
