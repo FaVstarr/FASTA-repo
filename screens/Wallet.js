@@ -180,8 +180,8 @@ export default function Wallet({ route, navigation }) {
           
             <View
               key={index}
-              className="ml-3 flex flex-row mb-2 shadow-lg"
-              
+              className=" flex flex-row mb-1"
+              style={{elevation:4, backgroundColor: 'white', borderRadius: 3, padding: 10, marginVertical: 5}}
             >
               <View>
                 <Text className="pl-2 text-[16px] text-[#3A3A3A]">

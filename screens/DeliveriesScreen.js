@@ -124,7 +124,7 @@ export default function DeliveriesScreen() {
               />
             )}
           </MapView>
-          {deliveryStatus !== 'Package Delivered' && deliveryStatus === "Ready for Delivery" && ( // Render only if the package is not delivered
+          {deliveryStatus !== 'Package Delivered' && ( // Render only if the package is not delivered
           <View style={{ minHeight: 200, backgroundColor: 'lightgray', padding: 10 }}>
             <Text>Tracking Number: {deliveryInfo.trackingNumber}</Text>
             <Text>Status: {deliveryStatus}</Text>
