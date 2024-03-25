@@ -102,8 +102,7 @@ export default function DeliveriesScreen() {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      {deliveryStatus === 'Package Delivered' ? (
-        // Show only the map section if the package is delivered
+      {deliveryStatus === 'Package Delivered' || deliveryStatus === 'Ready for Delivery'  ? (
         <View style={{ flex: 1 }}>
           <MapView
             style={{ flex: 1 }}
@@ -125,9 +124,15 @@ export default function DeliveriesScreen() {
               />
             )}
           </MapView>
+          {deliveryStatus !== 'Package Delivered' && ( // Render only if the package is not delivered
+          <View style={{ minHeight: 200, backgroundColor: 'lightgray', padding: 10 }}>
+            <Text>Tracking Number: {deliveryInfo.trackingNumber}</Text>
+            <Text>Status: {deliveryStatus}</Text>
+            {/* Render other delivery info properties here */}
+          </View>
+        )}
         </View>
       ) : (
-        // Show the tracking section if the delivery is not complete
         <View style={{ flex: 1 }}>
           <View style={{ height: 400 }}>
             {location ? (

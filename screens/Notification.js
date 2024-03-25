@@ -68,7 +68,7 @@ export default function Notification() {
           <Text>No notifications at the moment...</Text>
         ) : (
           completedDeliveries.map((delivery) => (
-            <View key={delivery.id} className="pl-5">
+            <View key={delivery.id} className="pl-5 mb-4">
               
               <View>
               <View className="flex-row gap-9">
@@ -79,7 +79,9 @@ export default function Notification() {
               <Text>Destination: <Text className={`${delivery.isCompleted ? 'text-green-600' : 'text-yellow-500'}`}>{delivery.destinationAddress}</Text></Text>
               <Text>Origin: <Text className={`${delivery.isCompleted ? 'text-green-600' : 'text-yellow-500'}`}>{delivery.originAddress}</Text></Text>
               </View>
-              <Text className={`bg-${delivery.isCompleted ? 'green' : 'yellow'}-500 px-2 py-2 text-white w-[100px] mt-4 rounded-md`}>{delivery.isCompleted ? 'Completed' : 'Pending'}</Text>
+              <View style={{ backgroundColor: delivery.isCompleted ? 'green' : 'rgb(234 179 8)', padding: 2, marginTop: 4, borderRadius: 8 , width: 100 , paddingRight: 4}}>
+              <Text style={{ color: 'white', textAlign: 'center', width: 100 }}>{delivery.isCompleted ? 'Completed' : 'Pending'}</Text>
+            </View>
               {/* Add more delivery details as needed */}
             </View>
           ))

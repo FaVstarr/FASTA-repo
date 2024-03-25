@@ -164,6 +164,7 @@ export default function DeliveriesPayment({ navigation }) {
         userId: userId,
         ...deliveryInfo,
         isCompleted: false,
+        isAccepted: false,
         isDeclined:false,
         declinedBy: null,
         timestamp: firebase.firestore.FieldValue.serverTimestamp(),

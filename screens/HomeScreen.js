@@ -107,7 +107,7 @@ export default function HomeScreen({navigation, route}) {
       </View>
       <TouchableOpacity className="pl-[74px] pt-3" onPress={() => navigation.navigate('Notification')}>
         <Image source={require('../assets/images/notification.png')}/>
-        {showNotificationDot && <View style={{ position: 'absolute', top: 5, right: 5, backgroundColor: 'red', width: 10, height: 10, borderRadius: 5 }} />}
+        {showNotificationDot && <View style={{ position: 'absolute', top: 8, right: 1, backgroundColor: 'red', width: 10, height: 10, borderRadius: 5 }} />}
       </TouchableOpacity>
         </View>
 
