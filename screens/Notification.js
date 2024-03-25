@@ -38,8 +38,8 @@ export default function Notification() {
 
         // Query completed deliveries assigned to the current user
         const querySnapshot = await deliveriesRef
-          // .where('assignedTo', '==', userId)
-          .where('isCompleted', '==', true)
+          .where('userId', '==', userId)
+          // .where('isCompleted', '==', true || 'isCompleted', '==', false)
           .get();
 
         const completedDeliveriesData = querySnapshot.docs.map((doc) => ({
@@ -65,7 +65,7 @@ export default function Notification() {
         {loading ? (
           <Text>Loading...</Text>
         ) : completedDeliveries.length === 0 ? (
-          <Text>No completed deliveries found</Text>
+          <Text>No notifications at the moment...</Text>
         ) : (
           completedDeliveries.map((delivery) => (
             <View key={delivery.id} className="pl-5">
@@ -75,9 +75,9 @@ export default function Notification() {
                 <Text className='text-[25px]'>Delivery status</Text>
                
               </View>
-              <Text>Delivery ID:<Text className="text-green-600"> {delivery.trackingNumber}</Text></Text>
-              <Text>Destination: <Text className="text-green-600">{delivery.destinationAddress}</Text></Text>
-              <Text>Origin: <Text className="text-green-600" >{delivery.originAddress}</Text></Text>
+              <Text>Delivery ID:<Text className={`${delivery.isCompleted ? 'text-green-600' : 'text-yellow-500'}`}> {delivery.trackingNumber}</Text></Text>
+              <Text>Destination: <Text className={`${delivery.isCompleted ? 'text-green-600' : 'text-yellow-500'}`}>{delivery.destinationAddress}</Text></Text>
+              <Text>Origin: <Text className={`${delivery.isCompleted ? 'text-green-600' : 'text-yellow-500'}`}>{delivery.originAddress}</Text></Text>
               </View>
               <Text className={`bg-${delivery.isCompleted ? 'green' : 'yellow'}-500 px-2 py-2 text-white w-[100px] mt-4 rounded-md`}>{delivery.isCompleted ? 'Completed' : 'Pending'}</Text>
               {/* Add more delivery details as needed */}

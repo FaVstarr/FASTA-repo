@@ -11,6 +11,8 @@ export default function HomeScreen({navigation, route}) {
   // const fullName = route.params
   const {firstName, routeName} = route.params;
   const [search, setSearch] = useState("");
+  const [showNotificationDot, setShowNotificationDot] = useState(false); // State to control the notification dot
+
   const updateSearch = (search) => {
     setSearch(search);
   };
@@ -48,6 +50,29 @@ export default function HomeScreen({navigation, route}) {
     return () => backHandler.remove()
   },[navigation, routeName])
 
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const user = firebase.auth().currentUser;
+        
+
+        // Check if there are deliveries that are accepted or completed
+        const deliveriesRef = firebase.firestore().collection('deliveries');
+        const querySnapshot = await deliveriesRef
+          .where('userId', '==', user.uid)
+          .where('isAccepted', '==', true)
+          .where('isCompleted', '==', false)
+          .get();
+
+        setShowNotificationDot(!querySnapshot.empty); // Show dot if there are accepted but not completed deliveries
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
   const handleSignOut = async () =>{
 
     try{
@@ -82,6 +107,7 @@ export default function HomeScreen({navigation, route}) {
       </View>
       <TouchableOpacity className="pl-[74px] pt-3" onPress={() => navigation.navigate('Notification')}>
         <Image source={require('../assets/images/notification.png')}/>
+        {showNotificationDot && <View style={{ position: 'absolute', top: 5, right: 5, backgroundColor: 'red', width: 10, height: 10, borderRadius: 5 }} />}
       </TouchableOpacity>
         </View>
 

@@ -4,13 +4,32 @@ import { useRoute } from "@react-navigation/native";
 import MapView, { Marker } from 'react-native-maps';
 
 import * as Location from 'expo-location';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/firestore';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAcyj5Sh9Isv6eLHfnPWyPA2gnl7Mj03oU",
+  authDomain: "fasta-60df9.firebaseapp.com",
+  databaseURL: "https://fasta-60df9-default-rtdb.firebaseio.com",
+  projectId: "fasta-60df9",
+  storageBucket: "fasta-60df9.appspot.com",
+  messagingSenderId: "243432423325",
+  appId: "1:243432423325:web:9a32395c903043fc4ab974",
+  measurementId: "G-VQW632BYGD",
+};
+
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
 
 export default function DeliveriesScreen() {
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
-  
-  const route = useRoute()
-  const {deliveryInfo} = route.params ?? {deliveryInfo: null}
+  const [deliveryInfo, setDeliveryInfo] = useState(null);
+  const [deliveryStatus, setDeliveryStatus] = useState('Pending');
+  const [loading, setLoading] = useState(true);
+
+  const route = useRoute();
 
   useEffect(() => {
     (async () => {
@@ -25,11 +44,66 @@ export default function DeliveriesScreen() {
     })();
   }, []);
 
-
+  useEffect(() => {
+    const fetchDeliveryInfo = async () => {
+      try {
+        const user = firebase.auth().currentUser;
+        if (!user) {
+          console.error('User not authenticated');
+          return;
+        }
+  
+        const userId = user.uid;
+        const deliveriesRef = firebase.firestore().collection('deliveries');
+  
+        const querySnapshot = await deliveriesRef
+          .where('userId', '==', userId)
+          .get();
+  
+        const deliveriesData = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+  
+        let completedDelivery = null;
+        for (const delivery of deliveriesData) {
+          if (delivery.isCompleted) {
+            completedDelivery = delivery;
+            break;
+          }
+        }
+  
+        if (completedDelivery) {
+          setDeliveryInfo(completedDelivery);
+          setDeliveryStatus('Package Delivered');
+        } else {
+          // If there is no completed delivery, set status based on accepted status
+          const latestDelivery = deliveriesData[0];
+          setDeliveryInfo(latestDelivery);
+  
+          if (latestDelivery && latestDelivery.isAccepted) {
+            setDeliveryStatus('Ready for Delivery');
+          } else {
+            setDeliveryStatus('Pending');
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching delivery info:', error);
+        Alert.alert('Error', 'Failed to fetch delivery info');
+      } finally {
+        setLoading(false);
+      }
+    };
+  
+    if (!deliveryInfo) {
+      fetchDeliveryInfo();
+    }
+  }, []);
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      {deliveryInfo ? (
+      {deliveryStatus === 'Package Delivered' ? (
+        // Show only the map section if the package is delivered
         <View style={{ flex: 1 }}>
           <MapView
             style={{ flex: 1 }}
@@ -51,12 +125,9 @@ export default function DeliveriesScreen() {
               />
             )}
           </MapView>
-          <View style={{ minHeight: 200, backgroundColor: 'lightgray', padding: 10 }}>
-            <Text>Tracking Number: {deliveryInfo.trackingNumber}</Text>
-            {/* Render other delivery info properties here */}
-          </View>
         </View>
       ) : (
+        // Show the tracking section if the delivery is not complete
         <View style={{ flex: 1 }}>
           <View style={{ height: 400 }}>
             {location ? (
