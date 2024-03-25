@@ -31,6 +31,7 @@ import RiderSignup from './screens/RiderScreens/RiderSignup';
 import RiderTrack from './screens/RiderTrack';
 import RecievePackage from './screens/RiderScreens/RecievePackage';
 import Map from './screens/RiderScreens/Map';
+import Feedback from './screens/Feedback';
 
 
 
@@ -124,6 +125,7 @@ export default function App() {
           
           <Stack.Screen name="HomeScreen" component={TabNavigation} options={{headerShown: false}}  />
           <Stack.Screen name='Notification' component={Notification}  />
+          <Stack.Screen name='Feedback' component={Feedback} />
           <Stack.Screen name='SendPackage' component={SendPackage} options={{
             title: 'Send A Package',
             headerTitleAlign: 'center',

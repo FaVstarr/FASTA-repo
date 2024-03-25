@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, SafeAreaView, Alert } from 'react-native';
+import React, { useState, useEffect, useCallback } from 'react';
+import { useFocusEffect } from '@react-navigation/native'
+import { View, Text, SafeAreaView, Alert, TouchableOpacity } from 'react-native';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
 
@@ -19,9 +20,12 @@ if (!firebase.apps.length) {
 }
 
 
-export default function Notification() {
+export default function Notification({navigation}) {
   const [completedDeliveries, setCompletedDeliveries] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [showFeedbackButton, setShowFeedbackButton] = useState(true);
+
+  
 
   useEffect(() => {
     const fetchCompletedDeliveries = async () => {
@@ -57,7 +61,17 @@ export default function Notification() {
     };
     console.log("fetching...")
     fetchCompletedDeliveries();
+
+   
   }, []);
+ 
+
+  const handleFeedback = (deliveryId) => {
+    // Navigate to the feedback/rating screen and pass the delivery ID as a parameter
+    navigation.navigate('Feedback', { deliveryId });
+  };
+
+ 
 
   return (
     <SafeAreaView>
@@ -68,7 +82,7 @@ export default function Notification() {
           <Text>No notifications at the moment...</Text>
         ) : (
           completedDeliveries.map((delivery) => (
-            <View key={delivery.id} className="pl-5 mb-4">
+            <View key={delivery.id} className="px-5 mb-4">
               
               <View>
               <View className="flex-row gap-9">
@@ -82,6 +96,13 @@ export default function Notification() {
               <View style={{ backgroundColor: delivery.isCompleted ? 'green' : 'rgb(234 179 8)', padding: 2, marginTop: 4, borderRadius: 8 , width: 100 , paddingRight: 4}}>
               <Text style={{ color: 'white', textAlign: 'center', width: 100 }}>{delivery.isCompleted ? 'Completed' : 'Pending'}</Text>
             </View>
+            {delivery.isCompleted && !delivery.rating && (
+                <TouchableOpacity onPress={() => handleFeedback(delivery.id)}>
+                  <View style={{ backgroundColor: 'blue', padding: 8, marginTop: 10, borderRadius: 8 }}>
+                    <Text style={{ color: 'white', textAlign: 'center' }}>Give Feedback</Text>
+                  </View>
+                </TouchableOpacity>
+              )}
               {/* Add more delivery details as needed */}
             </View>
           ))
